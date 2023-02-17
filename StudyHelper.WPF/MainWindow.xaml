@@ -7,8 +7,8 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:views="clr-namespace:StudyHelper.WPF.Views"
     Title="MainWindow"
-    Width="800"
-    Height="450"
+    Width="1280"
+    Height="720"
     mc:Ignorable="d">
     <Grid>
         <views:StudyHelperView Margin="25" />
