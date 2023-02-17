@@ -8,5 +8,11 @@ namespace StudyHelper.WPF.ViewModels
 {
     public class MainViewModel : ViewModelBase
     {
+        public StudyHelperViewModel StudyHelperViewModel { get; }
+
+        public MainViewModel(StudyHelperViewModel studyHelperViewModel)
+        {
+            StudyHelperViewModel = studyHelperViewModel;
+        }
     }
 }

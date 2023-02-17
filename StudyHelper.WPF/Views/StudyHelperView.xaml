@@ -21,13 +21,13 @@
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
 
-            <Grid Grid.Column="0">
-                <Components:Pomodoro Margin="0,0,5,0" />
-            </Grid>
+            <Components:Pomodoro
+                Grid.Column="0"
+                Margin="0,0,5,0"
+                DataContext="{Binding PomodoroViewModel}" />
 
-            <Grid Grid.Column="1">
-                <Components:MoodCheck Margin="5,0,0,0" />
-            </Grid>
+            <Components:MoodCheck Grid.Column="1" Margin="5,0,0,0" />
+
 
         </Grid>
 

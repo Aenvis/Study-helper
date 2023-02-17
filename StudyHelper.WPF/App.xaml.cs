@@ -21,9 +21,12 @@ namespace StudyHelper.WPF
 
         protected override void OnStartup(StartupEventArgs e)
         {
+
+            StudyHelperViewModel studyHelperViewModel = new StudyHelperViewModel();
+
             MainWindow = new MainWindow()
             {
-                DataContext = new MainViewModel()
+                DataContext = new MainViewModel(studyHelperViewModel)
             };
 
             MainWindow.Show();

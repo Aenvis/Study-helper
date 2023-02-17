@@ -11,6 +11,6 @@
     Height="720"
     mc:Ignorable="d">
     <Grid>
-        <views:StudyHelperView Margin="25" />
+        <views:StudyHelperView Margin="25" DataContext="{Binding StudyHelperViewModel}" />
     </Grid>
 </Window>
