@@ -9,6 +9,20 @@ namespace StudyHelper.WPF.ViewModels
 {
     public class PomodoroViewModel : ViewModelBase
     {
+        // displaying time in mm : ss format
+        private const float _maxSeconds = 59f;
+        private float _currentTimeInSeconds;
+
+        public float CurrentTimeInSeconds
+        {
+            get => _currentTimeInSeconds;
+            set
+            {
+                _currentTimeInSeconds = value;
+                OnPropertyChanged(nameof(CurrentTimeDisplay));
+            }
+        }
+
         private float _setTime;
         public float SetTime
         {
@@ -16,29 +30,34 @@ namespace StudyHelper.WPF.ViewModels
             set
             {
                 _setTime = value;
-                CurrentTime = SetTime;
+                CurrentTimeInMinutes = SetTime;
             }
         }
 
 
-        private float _currentTime;
-        public float CurrentTime
+        private float _currentTimeInMinutes;
+        public float CurrentTimeInMinutes
         {
-            get => _currentTime;
+            get => _currentTimeInMinutes;
             private set
             {
-                _currentTime = value;
+                _currentTimeInMinutes = value;
                 OnPropertyChanged(nameof(CurrentTimeDisplay));
             }
         }
 
-        public string CurrentTimeDisplay => CurrentTime.ToString();
+        public string CurrentTimeDisplay => (CurrentTimeInSeconds >= 10) ?
+            $"{CurrentTimeInMinutes} : {CurrentTimeInSeconds}" :
+            $"{CurrentTimeInMinutes} : 0{CurrentTimeInSeconds}";
+
+        public bool IsCounting { get; set; } 
 
         private readonly DispatcherTimer timer;
 
         public PomodoroViewModel()
         {
-            CurrentTime = 15;
+            IsCounting = true;
+            CurrentTimeInMinutes = 15;
 
             timer = new();
             timer.Interval = new TimeSpan(0,0,1);
@@ -48,13 +67,18 @@ namespace StudyHelper.WPF.ViewModels
 
         private void Timer_Tick(object? sender, EventArgs e)
         {
-            if (CurrentTime <= 0)
+            if (!IsCounting)
             {
                 timer.Stop();
                 return;
             }
-
-            CurrentTime--;  
+            
+            CurrentTimeInSeconds--;
+            if(CurrentTimeInSeconds <= 0)
+            {
+                CurrentTimeInMinutes--;
+                CurrentTimeInSeconds = _maxSeconds;
+            }
         }
     }
 }
