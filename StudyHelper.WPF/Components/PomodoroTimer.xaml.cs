@@ -16,11 +16,11 @@ using System.Windows.Shapes;
 namespace StudyHelper.WPF.Components
 {
     /// <summary>
-    /// Logika interakcji dla klasy Pomodoro.xaml
+    /// Logika interakcji dla klasy PomodoroTimer.xaml
     /// </summary>
-    public partial class Pomodoro : UserControl
+    public partial class PomodoroTimer : UserControl
     {
-        public Pomodoro()
+        public PomodoroTimer()
         {
             InitializeComponent();
         }

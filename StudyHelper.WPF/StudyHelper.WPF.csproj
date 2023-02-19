@@ -9,16 +9,18 @@
 
   <ItemGroup>
     <None Remove="play-button.png" />
+    <None Remove="Resources\Backgrounds\guts-pixelart.jpeg" />
     <None Remove="Resources\ButtonImages\play-button.png" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Commands\" />
+    <Resource Include="play-button.png" />
+    <Resource Include="Resources\Backgrounds\guts-pixelart.jpeg" />
+    <Resource Include="Resources\ButtonImages\play-button.png" />
   </ItemGroup>
 
   <ItemGroup>
-    <Resource Include="play-button.png" />
-    <Resource Include="Resources\ButtonImages\play-button.png" />
+    <Folder Include="Stores\" />
   </ItemGroup>
 
 </Project>

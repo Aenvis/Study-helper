@@ -11,17 +11,6 @@ namespace StudyHelper.WPF.ViewModels
     {
         // displaying time in mm : ss format
         private const float _maxSeconds = 59f;
-        private float _currentTimeInSeconds;
-
-        public float CurrentTimeInSeconds
-        {
-            get => _currentTimeInSeconds;
-            set
-            {
-                _currentTimeInSeconds = value;
-                OnPropertyChanged(nameof(CurrentTimeDisplay));
-            }
-        }
 
         private float _setTime;
         public float SetTime
@@ -34,7 +23,6 @@ namespace StudyHelper.WPF.ViewModels
             }
         }
 
-
         private float _currentTimeInMinutes;
         public float CurrentTimeInMinutes
         {
@@ -42,6 +30,17 @@ namespace StudyHelper.WPF.ViewModels
             private set
             {
                 _currentTimeInMinutes = value;
+                OnPropertyChanged(nameof(CurrentTimeDisplay));
+            }
+        }
+
+        private float _currentTimeInSeconds;
+        public float CurrentTimeInSeconds
+        {
+            get => _currentTimeInSeconds;
+            set
+            {
+                _currentTimeInSeconds = value;
                 OnPropertyChanged(nameof(CurrentTimeDisplay));
             }
         }
@@ -57,7 +56,7 @@ namespace StudyHelper.WPF.ViewModels
         public PomodoroViewModel()
         {
             IsCounting = true;
-            CurrentTimeInMinutes = 15;
+            CurrentTimeInMinutes = 1;
 
             timer = new();
             timer.Interval = new TimeSpan(0,0,1);
@@ -79,6 +78,9 @@ namespace StudyHelper.WPF.ViewModels
                 CurrentTimeInMinutes--;
                 CurrentTimeInSeconds = _maxSeconds;
             }
+
+            if (CurrentTimeInMinutes < 0)
+                IsCounting = false;
         }
     }
 }

@@ -10,9 +10,9 @@ namespace StudyHelper.WPF.ViewModels
     {
         public PomodoroViewModel PomodoroViewModel { get; }
 
-        public StudyHelperViewModel()
+        public StudyHelperViewModel(PomodoroViewModel pomodoroViewModel)
         {
-            PomodoroViewModel = new PomodoroViewModel();
+            PomodoroViewModel = pomodoroViewModel;
         }
     }
 }

@@ -12,5 +12,8 @@
     mc:Ignorable="d">
     <Grid>
         <views:StudyHelperView Margin="25" DataContext="{Binding StudyHelperViewModel}" />
+        <Grid.Background>
+            <ImageBrush ImageSource="/Resources/Backgrounds/guts-pixelart.jpeg" />
+        </Grid.Background>
     </Grid>
 </Window>
