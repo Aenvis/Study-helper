@@ -9,75 +9,65 @@
     d:DesignWidth="800"
     mc:Ignorable="d">
     <Grid>
-        <Border
-            Padding="20"
-            BorderBrush="Black"
-            BorderThickness="1"
-            CornerRadius="5"
-            SnapsToDevicePixels="True">
-            <Border.Background>
-                <SolidColorBrush Opacity="0.4" Color="LightCyan" />
-            </Border.Background>
-            <Grid>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="auto" />
-                    <RowDefinition Height="auto" />
-                </Grid.RowDefinitions>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto" />
+                <RowDefinition Height="auto" />
+            </Grid.RowDefinitions>
+            <Button
+                Grid.Row="0"
+                Width="auto"
+                Height="auto"
+                Margin="0,30,0,0"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+                Background="Transparent"
+                BorderBrush="Transparent"
+                Command="{Binding OpenTimerSettingsCommand}"
+                Content="{Binding CurrentTimeDisplay}"
+                FontSize="100" />
+
+            <Grid Grid.Row="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+
                 <Button
-                    Grid.Row="0"
-                    Width="auto"
+                    Grid.Column="0"
+                    Width="50"
                     Height="auto"
-                    Margin="0,30,0,0"
-                    HorizontalAlignment="Center"
-                    VerticalAlignment="Center"
+                    Margin="0,20,30,0"
+                    HorizontalAlignment="Right"
                     Background="Transparent"
                     BorderBrush="Transparent"
-                    Command="{Binding OpenTimerSettingsCommand}"
-                    Content="{Binding CurrentTimeDisplay}"
-                    FontSize="100" />
+                    Command="{Binding PauseTimeCommand}">
+                    <Image
+                        Width="48"
+                        Height="48"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center"
+                        Source="/Resources/ButtonImages/play-button.png" />
+                </Button>
 
-                <Grid Grid.Row="1">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*" />
-                        <ColumnDefinition Width="*" />
-                    </Grid.ColumnDefinitions>
-
-                    <Button
-                        Grid.Column="0"
-                        Width="50"
-                        Height="auto"
-                        Margin="0,20,30,0"
-                        HorizontalAlignment="Right"
-                        Background="Transparent"
-                        BorderBrush="Transparent"
-                        Command="{Binding PauseTimeCommand}">
-                        <Image
-                            Width="48"
-                            Height="48"
-                            HorizontalAlignment="Center"
-                            VerticalAlignment="Center"
-                            Source="/Resources/ButtonImages/play-button.png" />
-                    </Button>
-
-                    <Button
-                        Grid.Column="1"
-                        Width="50"
-                        Height="auto"
-                        Margin="30,20,0,0"
-                        HorizontalAlignment="Left"
-                        Background="Transparent"
-                        BorderBrush="Transparent"
-                        Command="{Binding StartTimeCommand}">
-                        <Image
-                            Width="48"
-                            Height="48"
-                            HorizontalAlignment="Center"
-                            VerticalAlignment="Center"
-                            Source="/Resources/ButtonImages/play-button.png" />
-                    </Button>
-                </Grid>
-
+                <Button
+                    Grid.Column="1"
+                    Width="50"
+                    Height="auto"
+                    Margin="30,20,0,0"
+                    HorizontalAlignment="Left"
+                    Background="Transparent"
+                    BorderBrush="Transparent"
+                    Command="{Binding StartTimeCommand}">
+                    <Image
+                        Width="48"
+                        Height="48"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center"
+                        Source="/Resources/ButtonImages/play-button.png" />
+                </Button>
             </Grid>
-        </Border>
+
+        </Grid>
     </Grid>
 </UserControl>

@@ -64,7 +64,7 @@ namespace StudyHelper.WPF.ViewModels
         {
             StartTimeCommand = new StartTimeCommand(this);
             PauseTimeCommand = new PauseTimeCommand(this);
-            OpenTimerSettingsCommand = new OpenTimerSettingsCommand(modalNavigationStore);
+            OpenTimerSettingsCommand = new OpenTimerSettingsCommand(this, modalNavigationStore);
 
             IsCounting = true;
             SetTime = 1;
@@ -95,6 +95,7 @@ namespace StudyHelper.WPF.ViewModels
                 IsCounting = false;
                 CurrentTimeInMinutes = SetTime;
                 CurrentTimeInSeconds = 0f;
+                //OnCycleEnd();
             }
             
         }

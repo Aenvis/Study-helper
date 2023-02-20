@@ -16,8 +16,8 @@ namespace StudyHelper.WPF.Stores
             get => _currentViewModel;
             set
             {
-                _currentViewModel = value;
                 _currentViewModel?.Dispose();
+                _currentViewModel = value;
                 CurrentViewModelChanged?.Invoke();
             }
         }

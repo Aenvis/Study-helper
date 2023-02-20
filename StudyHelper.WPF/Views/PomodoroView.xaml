@@ -10,6 +10,16 @@
     d:DesignWidth="800"
     mc:Ignorable="d">
     <Grid>
-        <Components:PomodoroTimer DataContext="{Binding PomodoroTimerViewModel}" />
+        <Border
+            Padding="20"
+            BorderBrush="Black"
+            BorderThickness="1"
+            CornerRadius="5"
+            SnapsToDevicePixels="True">
+            <Border.Background>
+                <SolidColorBrush Opacity="0.4" Color="LightCyan" />
+            </Border.Background>
+            <Components:PomodoroTimer DataContext="{Binding PomodoroTimerViewModel}" />
+        </Border>
     </Grid>
 </UserControl>

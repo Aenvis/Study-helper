@@ -10,16 +10,18 @@ namespace StudyHelper.WPF.Commands
 {
     public class OpenTimerSettingsCommand : CommandBase
     {
+        private readonly PomodoroTimerViewModel _pomodoroTimerViewModel;
         private readonly ModalNavigationStore _modalNavigationStore;
 
-        public OpenTimerSettingsCommand(ModalNavigationStore modalNavigationStore)
+        public OpenTimerSettingsCommand(PomodoroTimerViewModel pomodoroTimerViewModel, ModalNavigationStore modalNavigationStore)
         {
+            _pomodoroTimerViewModel = pomodoroTimerViewModel;
             _modalNavigationStore = modalNavigationStore;   
         }
 
         public override void Execute(object? parameter)
         {
-            TimerSettingsViewModel timerSettingsViewModel = new TimerSettingsViewModel();
+            TimerSettingsViewModel timerSettingsViewModel = new TimerSettingsViewModel(_pomodoroTimerViewModel, _modalNavigationStore);
             _modalNavigationStore.CurrentViewModel = timerSettingsViewModel;
         }
     }
