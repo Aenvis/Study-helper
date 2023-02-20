@@ -18,16 +18,11 @@ namespace StudyHelper.WPF
     {
         private readonly PomodoroViewModel pomodoroViewModel;
         private readonly StudyHelperViewModel studyHelperViewModel;
-
-        private readonly ICommand startTimeCommand;
-        private readonly ICommand pauseTimeCommand;
        
         public App()
         {
-            pomodoroViewModel = new PomodoroViewModel();
-        
-            startTimeCommand = new StartTimeCommand(pomodoroViewModel);
-            pauseTimeCommand = new PauseTimeCommand(pomodoroViewModel);
+            PomodoroTimerViewModel pomodoroTimerViewModel = new PomodoroTimerViewModel();
+            pomodoroViewModel = new PomodoroViewModel(pomodoroTimerViewModel);
             studyHelperViewModel = new StudyHelperViewModel(pomodoroViewModel);
         }
 

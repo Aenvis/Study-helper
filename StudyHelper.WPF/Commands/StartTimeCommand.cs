@@ -9,16 +9,16 @@ namespace StudyHelper.WPF.Commands
 {
     class StartTimeCommand : CommandBase
     {
-        private readonly PomodoroViewModel _pomodoroViewModel;
+        private readonly PomodoroTimerViewModel _pomodoroTimerViewModel;
 
-        public StartTimeCommand(PomodoroViewModel pomodoroViewModel)
+        public StartTimeCommand(PomodoroTimerViewModel pomodoroTimerViewModel)
         {
-            _pomodoroViewModel = pomodoroViewModel;
+            _pomodoroTimerViewModel = pomodoroTimerViewModel;
         }
 
         public override void Execute(object? parameter)
         {
-            _pomodoroViewModel.IsCounting = true;
+           _pomodoroTimerViewModel.IsCounting = true;
         }
     }
 }

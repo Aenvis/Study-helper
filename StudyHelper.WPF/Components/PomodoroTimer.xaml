@@ -23,15 +23,18 @@
                     <RowDefinition Height="auto" />
                     <RowDefinition Height="auto" />
                 </Grid.RowDefinitions>
-                <TextBlock
+                <Button
                     Grid.Row="0"
                     Width="auto"
                     Height="auto"
                     Margin="0,30,0,0"
                     HorizontalAlignment="Center"
                     VerticalAlignment="Center"
-                    FontSize="100"
-                    Text="{Binding CurrentTimeDisplay}" />
+                    Background="Transparent"
+                    BorderBrush="Transparent"
+                    Command="{Binding OpenTimerSettingsCommand}"
+                    Content="{Binding CurrentTimeDisplay}"
+                    FontSize="100" />
 
                 <Grid Grid.Row="1">
                     <Grid.ColumnDefinitions>
@@ -47,7 +50,7 @@
                         HorizontalAlignment="Right"
                         Background="Transparent"
                         BorderBrush="Transparent"
-                        Command="{Binding StartTimeCommand}">
+                        Command="{Binding PauseTimeCommand}">
                         <Image
                             Width="48"
                             Height="48"
@@ -64,7 +67,7 @@
                         HorizontalAlignment="Left"
                         Background="Transparent"
                         BorderBrush="Transparent"
-                        Command="{Binding PauseTimeCommand}">
+                        Command="{Binding StartTimeCommand}">
                         <Image
                             Width="48"
                             Height="48"
