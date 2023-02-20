@@ -1,4 +1,5 @@
 ﻿using StudyHelper.WPF.Commands;
+using StudyHelper.WPF.Stores;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -59,11 +60,11 @@ namespace StudyHelper.WPF.ViewModels
 
         private readonly DispatcherTimer _timer;
 
-        public PomodoroTimerViewModel()
+        public PomodoroTimerViewModel(ModalNavigationStore modalNavigationStore)
         {
             StartTimeCommand = new StartTimeCommand(this);
             PauseTimeCommand = new PauseTimeCommand(this);
-            OpenTimerSettingsCommand = new OpenTimerSettingsCommand();
+            OpenTimerSettingsCommand = new OpenTimerSettingsCommand(modalNavigationStore);
 
             IsCounting = true;
             SetTime = 1;

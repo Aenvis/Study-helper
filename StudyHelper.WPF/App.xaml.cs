@@ -1,4 +1,5 @@
 ﻿using StudyHelper.WPF.Commands;
+using StudyHelper.WPF.Stores;
 using StudyHelper.WPF.ViewModels;
 using System;
 using System.Collections.Generic;
@@ -16,21 +17,23 @@ namespace StudyHelper.WPF
     /// </summary>
     public partial class App : Application
     {
-        private readonly PomodoroViewModel pomodoroViewModel;
-        private readonly StudyHelperViewModel studyHelperViewModel;
+        private readonly PomodoroViewModel _pomodoroViewModel;
+        private readonly StudyHelperViewModel _studyHelperViewModel;
+        private readonly ModalNavigationStore _modalNavigationStore;
        
         public App()
         {
-            PomodoroTimerViewModel pomodoroTimerViewModel = new PomodoroTimerViewModel();
-            pomodoroViewModel = new PomodoroViewModel(pomodoroTimerViewModel);
-            studyHelperViewModel = new StudyHelperViewModel(pomodoroViewModel);
+            _modalNavigationStore = new ModalNavigationStore();
+            PomodoroTimerViewModel pomodoroTimerViewModel = new PomodoroTimerViewModel(_modalNavigationStore);
+            _pomodoroViewModel = new PomodoroViewModel(pomodoroTimerViewModel);
+            _studyHelperViewModel = new StudyHelperViewModel(_pomodoroViewModel);
         }
 
         protected override void OnStartup(StartupEventArgs e)
         {
             MainWindow = new MainWindow()
             {
-                DataContext = new MainViewModel(studyHelperViewModel)
+                DataContext = new MainViewModel(_studyHelperViewModel, _modalNavigationStore)
             };
 
             MainWindow.Show();
