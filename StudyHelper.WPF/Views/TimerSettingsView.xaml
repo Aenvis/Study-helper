@@ -14,13 +14,28 @@
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
-        <TextBox
-            Grid.Row="0"
-            Margin="20"
-            Padding="20"
-            FontSize="37"
-            Text="{Binding SetTime, UpdateSourceTrigger=PropertyChanged}" />
+        <Grid Grid.Row="0">
 
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="2*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <TextBlock
+                Grid.Column="0"
+                VerticalAlignment="Center"
+                FontSize="37"
+                Text="Pomodoro time (min)" />
+
+            <TextBox
+                Grid.Column="1"
+                MinWidth="50"
+                Margin="20"
+                FontSize="37"
+                Text="{Binding SetTimeDisplay}"
+                TextAlignment="Center" />
+
+        </Grid>
         <Grid Grid.Row="1">
 
             <Grid.ColumnDefinitions>

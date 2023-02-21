@@ -41,7 +41,7 @@
                     HorizontalAlignment="Right"
                     Background="Transparent"
                     BorderBrush="Transparent"
-                    Command="{Binding PauseTimeCommand}">
+                    Command="{Binding StartTimeCommand}">
                     <Image
                         Width="48"
                         Height="48"
@@ -58,7 +58,7 @@
                     HorizontalAlignment="Left"
                     Background="Transparent"
                     BorderBrush="Transparent"
-                    Command="{Binding StartTimeCommand}">
+                    Command="{Binding PauseTimeCommand}">
                     <Image
                         Width="48"
                         Height="48"

@@ -19,12 +19,14 @@ namespace StudyHelper.WPF
     {
         private readonly PomodoroViewModel _pomodoroViewModel;
         private readonly StudyHelperViewModel _studyHelperViewModel;
+
         private readonly ModalNavigationStore _modalNavigationStore;
-       
+        private readonly PomodoroSessionStore _pomodoroSessionStore;
         public App()
         {
             _modalNavigationStore = new ModalNavigationStore();
-            PomodoroTimerViewModel pomodoroTimerViewModel = new PomodoroTimerViewModel(_modalNavigationStore);
+            _pomodoroSessionStore = new PomodoroSessionStore();
+            PomodoroTimerViewModel pomodoroTimerViewModel = new PomodoroTimerViewModel(_modalNavigationStore, _pomodoroSessionStore);
             _pomodoroViewModel = new PomodoroViewModel(pomodoroTimerViewModel);
             _studyHelperViewModel = new StudyHelperViewModel(_pomodoroViewModel);
         }

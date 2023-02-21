@@ -13,21 +13,22 @@ namespace StudyHelper.WPF.ViewModels
     public class PomodoroTimerViewModel : ViewModelBase
     {
         // displaying time in mm : ss format
-        private const float _maxSeconds = 59f;
+        private const int _maxSeconds = 59;
 
-        private float _setTime;
-        public float SetTime
+        private readonly PomodoroSessionStore _pomodoroSessionStore;
+
+        private int _setTime;
+        public int SetTime
         {
             get => _setTime;
             set
             {
                 _setTime = value;
-                CurrentTimeInMinutes = SetTime;
             }
         }
 
-        private float _currentTimeInMinutes;
-        public float CurrentTimeInMinutes
+        private int _currentTimeInMinutes;
+        public int CurrentTimeInMinutes
         {
             get => _currentTimeInMinutes;
             private set
@@ -37,8 +38,8 @@ namespace StudyHelper.WPF.ViewModels
             }
         }
 
-        private float _currentTimeInSeconds;
-        public float CurrentTimeInSeconds
+        private int _currentTimeInSeconds;
+        public int CurrentTimeInSeconds
         {
             get => _currentTimeInSeconds;
             set
@@ -56,18 +57,21 @@ namespace StudyHelper.WPF.ViewModels
 
         public ICommand? StartTimeCommand { get; }
         public ICommand? PauseTimeCommand { get; }
+        public ICommand? ResetTimeCommand { get; }
         public ICommand? OpenTimerSettingsCommand { get; }
 
         private readonly DispatcherTimer _timer;
 
-        public PomodoroTimerViewModel(ModalNavigationStore modalNavigationStore)
+        public PomodoroTimerViewModel(ModalNavigationStore modalNavigationStore, PomodoroSessionStore pomodoroSessionStore)
         {
             StartTimeCommand = new StartTimeCommand(this);
             PauseTimeCommand = new PauseTimeCommand(this);
             OpenTimerSettingsCommand = new OpenTimerSettingsCommand(this, modalNavigationStore);
 
-            IsCounting = true;
+            _pomodoroSessionStore = pomodoroSessionStore;
+
             SetTime = 1;
+            CurrentTimeInMinutes = SetTime;
 
             _timer = new();
             _timer.Interval = new TimeSpan(0, 0, 1);
@@ -79,25 +83,28 @@ namespace StudyHelper.WPF.ViewModels
         {
             if (!IsCounting)
             {
-                _timer.Stop();
                 return;
             }
 
             CurrentTimeInSeconds--;
-            if (CurrentTimeInSeconds <= 0f)
+
+            if (CurrentTimeInSeconds <= 0)
             {
                 CurrentTimeInMinutes--;
+            
+                if (CurrentTimeInMinutes < 0)
+                {
+                    OnCycleEnd();
+                }
+
                 CurrentTimeInSeconds = _maxSeconds;
             }
+        }
 
-            if(CurrentTimeInMinutes < 0f)
-            {
-                IsCounting = false;
-                CurrentTimeInMinutes = SetTime;
-                CurrentTimeInSeconds = 0f;
-                //OnCycleEnd();
-            }
-            
+        private void OnCycleEnd()
+        {
+            _pomodoroSessionStore.IncrementCycleCount();
+            CurrentTimeInMinutes = _pomodoroSessionStore.GetBreakTime() - 1;
         }
     }
 }
