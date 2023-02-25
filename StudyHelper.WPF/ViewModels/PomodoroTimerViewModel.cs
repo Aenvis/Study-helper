@@ -62,11 +62,15 @@ namespace StudyHelper.WPF.ViewModels
 
         private readonly DispatcherTimer _timer;
 
-        public PomodoroTimerViewModel(ModalNavigationStore modalNavigationStore, PomodoroSessionStore pomodoroSessionStore)
+        public PomodoroTimerViewModel(StartTimeCommand startTimeCommand,
+                                      PauseTimeCommand pauseTimeCommand,
+                                      OpenTimerSettingsCommand openTimerSettingsCommand,
+                                      ModalNavigationStore modalNavigationStore, 
+                                      PomodoroSessionStore pomodoroSessionStore)
         {
-            StartTimeCommand = new StartTimeCommand(this);
-            PauseTimeCommand = new PauseTimeCommand(this);
-            OpenTimerSettingsCommand = new OpenTimerSettingsCommand(this, modalNavigationStore);
+            StartTimeCommand = startTimeCommand;
+            PauseTimeCommand = pauseTimeCommand;
+            OpenTimerSettingsCommand = openTimerSettingsCommand;
 
             _pomodoroSessionStore = pomodoroSessionStore;
 

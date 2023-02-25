@@ -10,7 +10,7 @@ namespace StudyHelper.WPF.ViewModels
     public class MainViewModel : ViewModelBase
     {
         private readonly ModalNavigationStore _modalNavigationStore;
-        public ViewModelBase CurrentModalViewModel => _modalNavigationStore.CurrentViewModel;
+        public ViewModelBase? CurrentModalViewModel => _modalNavigationStore?.CurrentViewModel;
         public bool IsModalOpen => _modalNavigationStore.IsOpen;
 
         public StudyHelperViewModel StudyHelperViewModel { get; }

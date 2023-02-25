@@ -16,8 +16,8 @@ namespace StudyHelper.WPF.ViewModels
         public ICommand? EditTimerSettingsCommand { get; }
         public ICommand? CloseModalCommand { get; }
 
-        private string _setTimeDisplay;
-        public string SetTimeDisplay
+        private string? _setTimeDisplay;
+        public string? SetTimeDisplay
         {
             get => _pomodoroTimerViewModel.SetTime.ToString();
             set
@@ -26,7 +26,7 @@ namespace StudyHelper.WPF.ViewModels
 
                 try
                 {
-                    _pomodoroTimerViewModel.SetTime = Int32.Parse(_setTimeDisplay);
+                    _pomodoroTimerViewModel.SetTime = int.Parse(_setTimeDisplay); 
                     OnPropertyChanged(nameof(SetTimeDisplay));
                 }
                 catch (Exception)

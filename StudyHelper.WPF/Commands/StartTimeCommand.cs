@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace StudyHelper.WPF.Commands
 {
-    class StartTimeCommand : CommandBase
+    public class StartTimeCommand : CommandBase
     {
         private readonly PomodoroTimerViewModel _pomodoroTimerViewModel;
 
