@@ -1,5 +1,6 @@
 ﻿using StudyHelper.WPF.Commands;
 using StudyHelper.WPF.Stores;
+using StudyHelper.WPF.Tools;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,98 +18,23 @@ namespace StudyHelper.WPF.ViewModels
 
         private readonly PomodoroSessionStore _pomodoroSessionStore;
 
-        private int _setTime;
-        public int SetTime
-        {
-            get => _setTime;
-            set
-            {
-                _setTime = value;
-            }
-        }
-
-        private int _currentTimeInMinutes;
-        public int CurrentTimeInMinutes
-        {
-            get => _currentTimeInMinutes;
-            private set
-            {
-                _currentTimeInMinutes = value;
-                OnPropertyChanged(nameof(CurrentTimeDisplay));
-            }
-        }
-
-        private int _currentTimeInSeconds;
-        public int CurrentTimeInSeconds
-        {
-            get => _currentTimeInSeconds;
-            set
-            {
-                _currentTimeInSeconds = value;
-                OnPropertyChanged(nameof(CurrentTimeDisplay));
-            }
-        }
-
-        public string CurrentTimeDisplay => (CurrentTimeInSeconds >= 10) ?
-            $"{CurrentTimeInMinutes} : {CurrentTimeInSeconds}" :
-            $"{CurrentTimeInMinutes} : 0{CurrentTimeInSeconds}";
-
-        public bool IsCounting { get; set; }
+        private readonly PomodoroTimer timer;
 
         public ICommand? StartTimeCommand { get; }
         public ICommand? PauseTimeCommand { get; }
         public ICommand? ResetTimeCommand { get; }
         public ICommand? OpenTimerSettingsCommand { get; }
 
-        private readonly DispatcherTimer _timer;
-
-        public PomodoroTimerViewModel(StartTimeCommand startTimeCommand,
-                                      PauseTimeCommand pauseTimeCommand,
-                                      OpenTimerSettingsCommand openTimerSettingsCommand,
-                                      ModalNavigationStore modalNavigationStore, 
-                                      PomodoroSessionStore pomodoroSessionStore)
+        public PomodoroTimerViewModel(ModalNavigationStore modalNavigationStore, 
+                                      PomodoroSessionStore pomodoroSessionStore,
+                                      PomodoroTimer pomodoroTimer)
         {
-            StartTimeCommand = startTimeCommand;
-            PauseTimeCommand = pauseTimeCommand;
-            OpenTimerSettingsCommand = openTimerSettingsCommand;
+            timer = pomodoroTimer;
+            StartTimeCommand = new StartTimeCommand(timer);
+            PauseTimeCommand = new PauseTimeCommand(timer);
+            OpenTimerSettingsCommand = new OpenTimerSettingsCommand(this, modalNavigationStore);
 
             _pomodoroSessionStore = pomodoroSessionStore;
-
-            SetTime = 1;
-            CurrentTimeInMinutes = SetTime;
-
-            _timer = new();
-            _timer.Interval = new TimeSpan(0, 0, 1);
-            _timer.Tick += Timer_Tick;
-            _timer.Start();
-        }
-
-        private void Timer_Tick(object? sender, EventArgs e)
-        {
-            if (!IsCounting)
-            {
-                return;
-            }
-
-            CurrentTimeInSeconds--;
-
-            if (CurrentTimeInSeconds <= 0)
-            {
-                CurrentTimeInMinutes--;
-            
-                if (CurrentTimeInMinutes < 0)
-                {
-                    OnCycleEnd();
-                }
-
-                CurrentTimeInSeconds = _maxSeconds;
-            }
-        }
-
-        private void OnCycleEnd()
-        {
-            _pomodoroSessionStore.IncrementCycleCount();
-            CurrentTimeInMinutes = _pomodoroSessionStore.GetBreakTime() - 1;
         }
     }
 }

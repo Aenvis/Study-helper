@@ -2,6 +2,7 @@
 using Microsoft.Extensions.Hosting;
 using StudyHelper.WPF.Commands;
 using StudyHelper.WPF.Stores;
+using StudyHelper.WPF.Tools;
 using StudyHelper.WPF.ViewModels;
 using System;
 using System.Collections.Generic;
@@ -11,6 +12,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
+using System.Windows.Threading;
 
 namespace StudyHelper.WPF
 {
@@ -41,6 +43,8 @@ namespace StudyHelper.WPF
 
                     services.AddSingleton<ModalNavigationStore>();
                     services.AddSingleton<PomodoroSessionStore>();
+
+                    services.AddSingleton<PomodoroTimer>();
 
                     services.AddSingleton<MainWindow>((services) => new MainWindow()
                     {
