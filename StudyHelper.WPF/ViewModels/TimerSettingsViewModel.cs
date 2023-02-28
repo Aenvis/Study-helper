@@ -1,5 +1,6 @@
 ﻿using StudyHelper.WPF.Commands;
 using StudyHelper.WPF.Stores;
+using StudyHelper.WPF.Tools;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,36 +12,24 @@ namespace StudyHelper.WPF.ViewModels
 {
     public class TimerSettingsViewModel : ViewModelBase
     {
-        private readonly PomodoroTimerViewModel _pomodoroTimerViewModel;
-
+        private readonly PomodoroSessionStore _pomodoroSessionStore;
         public ICommand? EditTimerSettingsCommand { get; }
         public ICommand? CloseModalCommand { get; }
 
-        private string? _setTimeDisplay;
-        public string? SetTimeDisplay
+        public string SetTimeString
         {
-            get => _pomodoroTimerViewModel.SetTime.ToString();
             set
             {
-                _setTimeDisplay = value;
-
-                try
-                {
-                    _pomodoroTimerViewModel.SetTime = int.Parse(_setTimeDisplay); 
-                    OnPropertyChanged(nameof(SetTimeDisplay));
-                }
-                catch (Exception)
-                {
-                    return;
-                }
+                OnPropertyChanged();
             }
         }
 
-        public TimerSettingsViewModel(PomodoroTimerViewModel pomodoroTimerViewModel, ModalNavigationStore modalNavigationStore)
+        public TimerSettingsViewModel(PomodoroSessionStore pomodoroSessionStore, ModalNavigationStore modalNavigationStore)
         {
-            EditTimerSettingsCommand = new EditTimerSettingsCommand(modalNavigationStore);
+            EditTimerSettingsCommand = new EditTimerSettingsCommand(this, modalNavigationStore);
             CloseModalCommand = new CloseModalCommand(modalNavigationStore);
-            _pomodoroTimerViewModel = pomodoroTimerViewModel;
+
+            _pomodoroSessionStore = pomodoroSessionStore;
         }
     }
 }

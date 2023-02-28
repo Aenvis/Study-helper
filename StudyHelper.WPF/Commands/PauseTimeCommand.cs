@@ -19,7 +19,7 @@ namespace StudyHelper.WPF.Commands
 
         public override void Execute(object? parameter)
         {
-            //  _pomodoroTimerViewModel.IsCounting = false;
+            _pomodoroTimer.Stop();
         }
     }
 }

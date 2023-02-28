@@ -15,33 +15,7 @@ namespace StudyHelper.WPF.Stores
 
     public class PomodoroSessionStore
     {
-        public const int  MaxCycleCount = 3;
-
-        private int _currentCycle;
-        public int CurrentCycle => _currentCycle;
-        
-        public Break CurrentBreak { get; private set; }
-
-        private Dictionary<Break, int> BreakTimes;
-
-        public PomodoroSessionStore()
-        {
-            BreakTimes = new Dictionary<Break, int>()
-            {
-            { Break.Short, 5 },
-            { Break.Long, 15 }
-            };
-        }
-
-        public void IncrementCycleCount()
-        {
-            if(++_currentCycle > MaxCycleCount)
-            {
-                CurrentBreak = CurrentCycle < 3 ? Break.Short : Break.Long; 
-                _currentCycle = 0;
-            }
-        }
-
-        public int GetBreakTime() => BreakTimes[CurrentBreak];
+        public event Action<int>? OnPomodoroTimeUpdated;
+        public void Update(int time) => OnPomodoroTimeUpdated?.Invoke(time);
     }
 }
