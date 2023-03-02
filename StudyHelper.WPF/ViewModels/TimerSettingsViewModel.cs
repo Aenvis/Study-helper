@@ -16,11 +16,14 @@ namespace StudyHelper.WPF.ViewModels
         public ICommand? EditTimerSettingsCommand { get; }
         public ICommand? CloseModalCommand { get; }
 
-        public string SetTimeString
+        private string? _setTimeString;
+        public string? SetTimeString
         {
+            get => _setTimeString;
             set
             {
-                OnPropertyChanged();
+                _setTimeString = value;
+                OnPropertyChanged(SetTimeString);
             }
         }
 
@@ -30,6 +33,14 @@ namespace StudyHelper.WPF.ViewModels
             CloseModalCommand = new CloseModalCommand(modalNavigationStore);
 
             _pomodoroSessionStore = pomodoroSessionStore;
+            SetTimeString = _pomodoroSessionStore.SetTime.ToString();
+        }
+
+        public void Update()
+        {
+            _pomodoroSessionStore.Update(!string.IsNullOrEmpty(SetTimeString) ? 
+                                                                            int.Parse(SetTimeString) :
+                                                                            _pomodoroSessionStore.SetTime);
         }
     }
 }

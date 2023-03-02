@@ -14,13 +14,29 @@ namespace StudyHelper.WPF.Tools
     {
         private readonly DispatcherTimer _timer;
 
-        public int Seconds { get; set; }
+        private int _currentSeconds;
+        public int CurrentSeconds
+        {
+            get => _currentSeconds;
+            set
+            {
+                _currentSeconds = value;
+            }
+        }
+        public int SetMinutes
+        {
+            get => _currentSeconds * 60;
+            set
+            {
+                _currentSeconds = value * 60;
+            }
+        }
 
         public event Action? OnTimerCompleted;
 
         public PomodoroTimer()
         {
-            Seconds = 25;
+            CurrentSeconds = 25 * 60;
 
             //instantiate _timer here instead of as a singleton in generic host because there won't be any other _timer in the application, and the host builder is messy enough
             _timer = new();
@@ -32,9 +48,9 @@ namespace StudyHelper.WPF.Tools
 
         private void Timer_Tick(object? sender, EventArgs e)
         {
-            if (Seconds > 0)
+            if (_currentSeconds > 0)
             {
-                Seconds--;
+                _currentSeconds--;
             }
             else
             {

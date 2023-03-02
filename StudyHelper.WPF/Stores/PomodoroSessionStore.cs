@@ -16,6 +16,14 @@ namespace StudyHelper.WPF.Stores
     public class PomodoroSessionStore
     {
         public event Action<int>? OnPomodoroTimeUpdated;
+
+        public int SetTime { get; set; }
+
+        public PomodoroSessionStore()
+        {
+            SetTime = 12;
+        }
+
         public void Update(int time) => OnPomodoroTimeUpdated?.Invoke(time);
     }
 }

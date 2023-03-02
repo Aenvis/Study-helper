@@ -8,8 +8,7 @@ namespace StudyHelper.WPF.Commands
     public class EditTimerSettingsCommand : CommandBase
     {
         private readonly TimerSettingsViewModel _timerSettingsViewModel;
-        private readonly PomodoroSessionStore _pomodoroSessionStore;
-        private ModalNavigationStore _modalNavigationStore;
+        private readonly ModalNavigationStore _modalNavigationStore;
 
         public EditTimerSettingsCommand(TimerSettingsViewModel timerSettingsViewModel,
                                         ModalNavigationStore modalNavigationStore)
@@ -20,7 +19,7 @@ namespace StudyHelper.WPF.Commands
 
         public override void Execute(object? parameter)
         {
-            
+            _timerSettingsViewModel.Update();
             _modalNavigationStore.Close();
         }
     }

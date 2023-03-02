@@ -13,11 +13,13 @@ namespace StudyHelper.WPF.ViewModels
 {
     public class PomodoroTimerViewModel : ViewModelBase
     {
-        private readonly PomodoroTimer timer;
+        private readonly PomodoroSessionStore _pomodoroSessionStore;
+
+        private  PomodoroTimer _timer;
 
         public string CurrentTimeDisplay
         {
-            get => TimeFormatConverter.SecondsToMmSsString(timer.Seconds);
+            get => TimeFormatConverter.SecondsToMmSsString(_timer.CurrentSeconds);
             private set
             {
                 OnPropertyChanged(nameof(CurrentTimeDisplay));
@@ -31,11 +33,27 @@ namespace StudyHelper.WPF.ViewModels
 
         public PomodoroTimerViewModel(ModalNavigationStore modalNavigationStore, PomodoroSessionStore pomodoroSessionStore, PomodoroTimer pomodoroTimer)
         {
-            timer = pomodoroTimer;
-            StartTimeCommand = new StartTimeCommand(timer);
-            PauseTimeCommand = new PauseTimeCommand(timer);
+            _timer = pomodoroTimer;
+            StartTimeCommand = new StartTimeCommand(_timer);
+            PauseTimeCommand = new PauseTimeCommand(_timer);
             OpenTimerSettingsCommand = new OpenTimerSettingsCommand(pomodoroSessionStore, modalNavigationStore);
-        }    
+
+            _pomodoroSessionStore = pomodoroSessionStore;
+
+            _pomodoroSessionStore.OnPomodoroTimeUpdated += PomodoroSessionStore_OnPomodoroTimeUpdated;
+            _timer.SetMinutes = _pomodoroSessionStore.SetTime;
+        }
+
+        public override void Dispose()
+        {
+            _pomodoroSessionStore.OnPomodoroTimeUpdated -= PomodoroSessionStore_OnPomodoroTimeUpdated;
+            base.Dispose();
+        }
+
+        private void PomodoroSessionStore_OnPomodoroTimeUpdated(int param)
+        {
+            _timer.SetMinutes = param;
+        }
     }
 }
 

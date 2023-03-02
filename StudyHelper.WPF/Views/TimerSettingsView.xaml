@@ -28,12 +28,14 @@
                 FontSize="37"
                 Text="Pomodoro time (min)" />
 
+
             <TextBox
                 Grid.Column="1"
                 MinWidth="50"
                 Margin="20"
                 FontSize="37"
-                Text="{Binding SetTimeDisplay}"
+                PreviewTextInput="NumberValidationTextBox"
+                Text="{Binding SetTimeString}"
                 TextAlignment="Center" />
 
         </Grid>
@@ -46,7 +48,7 @@
 
             <Button
                 Grid.Column="0"
-                Command="{Binding CloseModalCommand}"
+                Command="{Binding EditTimerSettingsCommand}"
                 Content="APPLY" />
 
             <Button
