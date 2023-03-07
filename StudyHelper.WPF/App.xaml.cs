@@ -25,33 +25,7 @@ namespace StudyHelper.WPF
 
         public App()
         {
-            _host = Host.CreateDefaultBuilder()
-                .ConfigureServices((context, services) =>
-                {
-                    services.AddTransient<StartTimeCommand>();
-                    services.AddTransient<PauseTimeCommand>();
-                    services.AddTransient<ResetTimeCommand>();
-
-                    services.AddTransient<OpenTimerSettingsCommand>();
-                    services.AddTransient<EditTimerSettingsCommand>();
-                    services.AddTransient<CloseModalCommand>();
-
-                    services.AddSingleton<MainViewModel>();
-                    services.AddSingleton<StudyHelperViewModel>();
-                    services.AddSingleton<PomodoroViewModel>();
-                    services.AddSingleton<PomodoroTimerViewModel>();
-
-                    services.AddSingleton<ModalNavigationStore>();
-                    services.AddSingleton<PomodoroSessionStore>();
-
-                    services.AddSingleton<PomodoroTimer>();
-
-                    services.AddSingleton<MainWindow>((services) => new MainWindow()
-                    {
-                        DataContext = services.GetRequiredService<MainViewModel>()
-                    });
-                })
-                .Build();
+            _host = CreateHost().Build();
         }
 
         protected override void OnStartup(StartupEventArgs e)
@@ -70,6 +44,37 @@ namespace StudyHelper.WPF
             _host.Dispose();
             
             base.OnExit(e);
+        }
+
+        private IHostBuilder CreateHost()
+        {
+            var host = Host.CreateDefaultBuilder()
+                .ConfigureServices((context, services) =>
+                {
+                    services.AddTransient<StartTimeCommand>();
+                    services.AddTransient<PauseTimeCommand>();
+                    services.AddTransient<ResetTimeCommand>();
+
+                    services.AddTransient<OpenTimerSettingsCommand>();
+                    services.AddTransient<EditTimerSettingsCommand>();
+                    services.AddTransient<CloseModalCommand>();
+
+                    services.AddSingleton<MainViewModel>();
+                    services.AddSingleton<PomodoroViewModel>();
+                    services.AddSingleton<PomodoroTimerViewModel>();
+
+                    services.AddSingleton<ModalNavigationStore>();
+                    services.AddSingleton<PomodoroSessionStore>();
+
+                    services.AddSingleton<PomodoroTimer>();
+
+                    services.AddSingleton<MainWindow>((services) => new MainWindow()
+                    {
+                        DataContext = services.GetRequiredService<MainViewModel>()
+                    });
+                });
+
+                return host;
         }
     }
 }

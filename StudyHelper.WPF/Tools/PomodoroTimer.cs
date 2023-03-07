@@ -23,6 +23,8 @@ namespace StudyHelper.WPF.Tools
                 _currentSeconds = value;
             }
         }
+
+        //minutes that are set for every cycle to begin at
         public int SetMinutes
         {
             get => _currentSeconds * 60;
