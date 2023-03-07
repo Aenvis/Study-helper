@@ -31,7 +31,7 @@
                 Content="{Binding CurrentModalViewModel}" />
         </custom:Modal>
 
-        <views:MainView Margin="25" DataContext="{Binding MainViewModel}" />
+        <views:MainView Margin="25" DataContext="{Binding ApplicationViewModel}" />
 
         <Grid.Background>
             <ImageBrush ImageSource="/Resources/Backgrounds/guts-pixelart.jpeg" />

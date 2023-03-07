@@ -13,14 +13,14 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace StudyHelper.WPF.Components
+namespace StudyHelper.WPF.Views
 {
     /// <summary>
-    /// Logika interakcji dla klasy TodoList.xaml
+    /// Logika interakcji dla klasy MoodCheck.xaml
     /// </summary>
-    public partial class TodoList : UserControl
+    public partial class MoodAnalysisView : UserControl
     {
-        public TodoList()
+        public MoodAnalysisView()
         {
             InitializeComponent();
         }

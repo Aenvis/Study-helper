@@ -10,16 +10,34 @@ namespace StudyHelper.WPF.ViewModels
     {
         private  TimerModel _timer;
 
+        public string TimeDisplay => _timer.TimeDisplay;
+
         public ICommand? StartTimeCommand { get; }
         public ICommand? PauseTimeCommand { get; }
-        public ICommand? ResetTimeCommand { get; }
-        public ICommand? OpenTimerSettingsCommand { get; }
+        public ICommand? StopTimeCommand { get; }
 
-        public PomodoroTimerViewModel(ModalNavigationStore modalNavigationStore, PomodoroSessionStore pomodoroSessionStore, PomodoroTimer pomodoroTimer)
+        public PomodoroTimerViewModel()
         {
-            
+            _timer = new TimerModel();
+            StartTimeCommand = new StartTimeCommand(_timer); 
+            PauseTimeCommand = new PauseTimeCommand(_timer); 
+            StopTimeCommand = new StopTimeCommand(_timer);
+
+            _timer.OnSetTimeChanged += Timer_OnSetTimeChanged;
+            _timer.OnTimerUpdate += _timer_OnTimerUpdate;
         }
 
+        private void Timer_OnSetTimeChanged()
+        {
+            if(_timer.State == TimerState.Stopped)
+                OnPropertyChanged(nameof(TimeDisplay));
+        }
+
+        private void _timer_OnTimerUpdate()
+        {
+            if (_timer.State == TimerState.Running)
+                OnPropertyChanged(nameof(TimeDisplay));
+        }
     }
 }
 

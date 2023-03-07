@@ -51,22 +51,17 @@ namespace StudyHelper.WPF
             var host = Host.CreateDefaultBuilder()
                 .ConfigureServices((context, services) =>
                 {
-                    services.AddTransient<StartTimeCommand>();
-                    services.AddTransient<PauseTimeCommand>();
-                    services.AddTransient<ResetTimeCommand>();
-
                     services.AddTransient<OpenTimerSettingsCommand>();
                     services.AddTransient<EditTimerSettingsCommand>();
                     services.AddTransient<CloseModalCommand>();
 
                     services.AddSingleton<MainViewModel>();
+                    services.AddSingleton<ApplicationViewModel>();
                     services.AddSingleton<PomodoroViewModel>();
                     services.AddSingleton<PomodoroTimerViewModel>();
 
                     services.AddSingleton<ModalNavigationStore>();
                     services.AddSingleton<PomodoroSessionStore>();
-
-                    services.AddSingleton<PomodoroTimer>();
 
                     services.AddSingleton<MainWindow>((services) => new MainWindow()
                     {

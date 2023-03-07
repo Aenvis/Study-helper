@@ -1,4 +1,5 @@
-﻿using StudyHelper.WPF.Tools;
+﻿using StudyHelper.WPF.Models;
+using StudyHelper.WPF.Tools;
 using StudyHelper.WPF.ViewModels;
 using System;
 using System.Collections.Generic;
@@ -10,16 +11,16 @@ namespace StudyHelper.WPF.Commands
 {
     public class PauseTimeCommand : CommandBase
     {
-        private readonly PomodoroTimer _pomodoroTimer;
+        private readonly TimerModel _timer;
 
-        public PauseTimeCommand(PomodoroTimer pomodoroTimer)
+        public PauseTimeCommand(TimerModel timer)
         {
-            _pomodoroTimer = pomodoroTimer;
+            _timer = timer;
         }
 
         public override void Execute(object? parameter)
         {
-            _pomodoroTimer.Stop();
+            _timer.Pause();
         }
     }
 }

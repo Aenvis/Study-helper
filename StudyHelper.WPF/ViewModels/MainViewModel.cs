@@ -13,14 +13,14 @@ namespace StudyHelper.WPF.ViewModels
         public ViewModelBase? CurrentModalViewModel => _modalNavigationStore?.CurrentViewModel;
         public bool IsModalOpen => _modalNavigationStore.IsOpen;
 
-        public PomodoroViewModel PomodoroViewModel { get; }
+        public ApplicationViewModel ApplicationViewModel { get; }
 
-        public MainViewModel(ModalNavigationStore modalNavigationStore, PomodoroViewModel pomodoroViewModel)
+        public MainViewModel(ModalNavigationStore modalNavigationStore, ApplicationViewModel applicationViewModel)
         {
             _modalNavigationStore = modalNavigationStore;
 
             _modalNavigationStore.CurrentViewModelChanged += ModalNavigationStore_CurrentViewModelChanged;
-            PomodoroViewModel = pomodoroViewModel;
+            ApplicationViewModel = applicationViewModel;
         }
 
         public override void Dispose()
