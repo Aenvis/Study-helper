@@ -29,7 +29,9 @@ namespace StudyHelper.WPF.Models
 
         public TimerState State { get; set; }
 
-        public string TimeDisplay => TimeSpan.FromSeconds(_secondsLeft).ToString("m\\:ss");
+        public string TimeDisplay => State == TimerState.Stopped ? TimeSpan.FromSeconds(TimeInMinutes * 60).ToString("m\\:ss")
+                                                                 : TimeSpan.FromSeconds(_secondsLeft).ToString("m\\:ss");
+
 
         public event Action? OnSetTimeChanged;
         public event Action? OnTimerUpdate;

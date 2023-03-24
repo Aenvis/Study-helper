@@ -44,6 +44,8 @@ namespace StudyHelper.WPF.ViewModels
         public void UpdatePomodoroTime(int timeInMinutes)
         {
             _timer.TimeInMinutes = timeInMinutes;
+            if (_timer.State == TimerState.Stopped)
+                OnPropertyChanged(nameof(TimeDisplay));
         }
     }
 }
