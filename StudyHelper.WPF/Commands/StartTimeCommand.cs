@@ -11,9 +11,9 @@ namespace StudyHelper.WPF.Commands
 {
     public class StartTimeCommand : CommandBase
     {
-        private readonly TimerModel _timer;
+        private readonly Timer _timer;
 
-        public StartTimeCommand(TimerModel timer)
+        public StartTimeCommand(Timer timer)
         {
             _timer = timer;
         }

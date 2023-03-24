@@ -8,15 +8,17 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="play-button.png" />
     <None Remove="Resources\Backgrounds\guts-pixelart.jpeg" />
-    <None Remove="Resources\ButtonImages\play-button.png" />
+    <None Remove="Resources\ButtonImages\btn_pause.png" />
+    <None Remove="Resources\ButtonImages\btn_play.png" />
+    <None Remove="Resources\ButtonImages\btn_stop.png" />
   </ItemGroup>
 
   <ItemGroup>
-    <Resource Include="play-button.png" />
     <Resource Include="Resources\Backgrounds\guts-pixelart.jpeg" />
-    <Resource Include="Resources\ButtonImages\play-button.png" />
+    <Resource Include="Resources\ButtonImages\btn_pause.png" />
+    <Resource Include="Resources\ButtonImages\btn_play.png" />
+    <Resource Include="Resources\ButtonImages\btn_stop.png" />
   </ItemGroup>
 
   <ItemGroup>

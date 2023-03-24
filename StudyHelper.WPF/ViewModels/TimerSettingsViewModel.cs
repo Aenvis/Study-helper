@@ -12,11 +12,12 @@ namespace StudyHelper.WPF.ViewModels
 {
     public class TimerSettingsViewModel : ViewModelBase
     {
-        private readonly PomodoroSessionStore _pomodoroSessionStore;
+        private readonly PomodoroTimerViewModel _pomodoroTimerViewModel;
         public ICommand? EditTimerSettingsCommand { get; }
         public ICommand? CloseModalCommand { get; }
 
         private string? _setTimeString;
+
         public string? SetTimeString
         {
             get => _setTimeString;
@@ -27,20 +28,17 @@ namespace StudyHelper.WPF.ViewModels
             }
         }
 
-        public TimerSettingsViewModel(PomodoroSessionStore pomodoroSessionStore, ModalNavigationStore modalNavigationStore)
+        public TimerSettingsViewModel(ModalNavigationStore modalNavigationStore, PomodoroTimerViewModel pomodoroTimerViewModel)
         {
-            EditTimerSettingsCommand = new EditTimerSettingsCommand(this, modalNavigationStore);
-            CloseModalCommand = new CloseModalCommand(modalNavigationStore);
-
-            _pomodoroSessionStore = pomodoroSessionStore;
-            SetTimeString = _pomodoroSessionStore.SetTime.ToString();
+            EditTimerSettingsCommand =  new ApplyTimerSettingsCommand(this, modalNavigationStore);
+            CloseModalCommand        =  new CloseModalCommand(modalNavigationStore);
+            _pomodoroTimerViewModel = pomodoroTimerViewModel;
         }
 
         public void Update()
         {
-            _pomodoroSessionStore.Update(!string.IsNullOrEmpty(SetTimeString) ? 
-                                                                            int.Parse(SetTimeString) :
-                                                                            _pomodoroSessionStore.SetTime);
+            if (Int32.TryParse(SetTimeString, out int timeInMinutes)) _pomodoroTimerViewModel.UpdatePomodoroTime(timeInMinutes);
         }
+        
     }
 }

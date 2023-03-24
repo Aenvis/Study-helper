@@ -11,9 +11,9 @@ namespace StudyHelper.WPF.Commands
 {
     public class PauseTimeCommand : CommandBase
     {
-        private readonly TimerModel _timer;
+        private readonly Timer _timer;
 
-        public PauseTimeCommand(TimerModel timer)
+        public PauseTimeCommand(Timer timer)
         {
             _timer = timer;
         }

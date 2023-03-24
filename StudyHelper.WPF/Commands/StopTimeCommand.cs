@@ -5,9 +5,9 @@ namespace StudyHelper.WPF.Commands
 {
     public class StopTimeCommand : CommandBase
     {
-        private readonly TimerModel _timer;
+        private readonly Timer _timer;
 
-        public StopTimeCommand(TimerModel timer)
+        public StopTimeCommand(Timer timer)
         {
             _timer = timer;
         }

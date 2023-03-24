@@ -1,9 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Media.Animation;
 using System.Windows.Threading;
 
 namespace StudyHelper.WPF.Models
@@ -15,12 +10,12 @@ namespace StudyHelper.WPF.Models
         Stopped
     }
 
-    public class TimerModel
+    public class Timer
     {
         private readonly DispatcherTimer _timer;
-        private int _timeInSeconds;
+
+        private int _secondsLeft;
         private int _timeInMinutes;
-        private TimerState _state;
 
         public int TimeInMinutes
         {
@@ -32,49 +27,33 @@ namespace StudyHelper.WPF.Models
             }
         }
 
-        public TimerState State
-        {
-            get => _state;
-            set
-            {
-                _state = value;
-            }
-        }
-         
-        public string TimeDisplay
-        {
-            get
-            { 
-                var minutes = _timeInSeconds / 60;
-                var seconds = _timeInSeconds % 60;
-                var minutesDisplay = minutes > 10 ? minutes.ToString() : $"0{minutes}";
-                var secondsDisplay = seconds > 10 ? seconds.ToString() : $"0{seconds}";
+        public TimerState State { get; set; }
 
-                return $"{minutesDisplay} : {secondsDisplay}";
-            } 
-        }
+        public string TimeDisplay => TimeSpan.FromSeconds(_secondsLeft).ToString("m\\:ss");
 
         public event Action? OnSetTimeChanged;
         public event Action? OnTimerUpdate;
 
-        public TimerModel()
+        public Timer()
         {
+            // built-in timer functionality
             _timer = new DispatcherTimer();
             _timer.Interval = new TimeSpan(0,0,1);
             _timer.Tick += OnTimerTick;
            
-            
+            //hardcoded set time and initial seconds calculation
             TimeInMinutes = 2;
-            _timeInSeconds = TimeInMinutes * 60;
+            _secondsLeft = TimeInMinutes * 60;
 
+            //initial clock state
             State = TimerState.Stopped;
         }
 
         private void OnTimerTick(object? sender, EventArgs e)
         {
-            if (_timeInSeconds > 0)
+            if (_secondsLeft > 0)
             {
-                _timeInSeconds--;
+                _secondsLeft--;
                 OnTimerUpdate?.Invoke();
             }
             else Stop();
@@ -82,12 +61,12 @@ namespace StudyHelper.WPF.Models
 
         public void Start() 
         {
-            if(_state == TimerState.Stopped)
+            if(State == TimerState.Stopped)
             {
-                _timeInSeconds = TimeInMinutes * 60;
+                _secondsLeft = TimeInMinutes * 60;
                 _timer.Start();
             }
-            else if(_state == TimerState.Paused)
+            else if(State == TimerState.Paused)
             {
                 _timer.Start();
             }

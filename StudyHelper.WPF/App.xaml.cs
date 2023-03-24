@@ -52,7 +52,7 @@ namespace StudyHelper.WPF
                 .ConfigureServices((context, services) =>
                 {
                     services.AddTransient<OpenTimerSettingsCommand>();
-                    services.AddTransient<EditTimerSettingsCommand>();
+                    services.AddTransient<ApplyTimerSettingsCommand>();
                     services.AddTransient<CloseModalCommand>();
 
                     services.AddSingleton<MainViewModel>();
