@@ -68,23 +68,14 @@ namespace StudyHelper.WPF.Models
             }
             else
             {
-                Stop();
+                Pause();
                 OnCycleUpdate();
             }
         }
 
         public void Start() 
         {
-            if(State == TimerState.Stopped)
-            {
-                _secondsLeft = TimeInMinutes * 60;
-                _timer.Start();
-            }
-            else if(State == TimerState.Paused)
-            {
-                _timer.Start();
-            }
-
+            _timer.Start();
             State = TimerState.Running;
         }
 
@@ -97,6 +88,9 @@ namespace StudyHelper.WPF.Models
         public void Stop()
         {
             _timer.Stop();
+            //Stop completely resets pomodoro
+            _cycle = 1;
+            _secondsLeft = TimeInMinutes * 60;
             State = TimerState.Stopped;
         }
 
@@ -112,6 +106,7 @@ namespace StudyHelper.WPF.Models
                 _cycle = 1;
             }
             _cycle++;
+            _secondsLeft = TimeInMinutes * 60;
             Start();
         }
     }
