@@ -16,7 +16,7 @@ namespace StudyHelper.WPF.Commands
 
         public OpenTimerSettingsCommand(PomodoroTimerViewModel pomodoroTimerViewModel, ModalNavigationStore modalNavigationStore)
         {
-            _pomodoroTimerViewModel = pomodoroTimerViewModel;
+            _pomodoroTimerViewModel = pomodoroTimerViewModel; 
             _modalNavigationStore = modalNavigationStore;   
         }
 

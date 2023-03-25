@@ -7,15 +7,24 @@ namespace StudyHelper.WPF.Models
     {
         Running,
         Paused,
+        // for proper pomodoro cycle,
+        // break occurs everytime the timer counts down to 0 seconds;
+        // it's different from pause or stop in such a way that pause and
+        // stop are caused by the user, and break is caused by the logic and rules of pomodoro
+        Break, 
         Stopped
     }
 
     public class Timer
     {
         private readonly DispatcherTimer _timer;
+        private readonly Tuple<int, int> _breakTime = new Tuple<int, int>(1, 2);
 
         private int _secondsLeft;
         private int _timeInMinutes;
+
+        private const int _maxCycle = 4;
+        private int _cycle = 1;
 
         public int TimeInMinutes
         {
@@ -32,7 +41,6 @@ namespace StudyHelper.WPF.Models
         public string TimeDisplay => State == TimerState.Stopped ? TimeSpan.FromSeconds(TimeInMinutes * 60).ToString("m\\:ss")
                                                                  : TimeSpan.FromSeconds(_secondsLeft).ToString("m\\:ss");
 
-
         public event Action? OnSetTimeChanged;
         public event Action? OnTimerUpdate;
 
@@ -44,7 +52,7 @@ namespace StudyHelper.WPF.Models
             _timer.Tick += OnTimerTick;
            
             //hardcoded set time and initial seconds calculation
-            TimeInMinutes = 2;
+            TimeInMinutes = 1;
             _secondsLeft = TimeInMinutes * 60;
 
             //initial clock state
@@ -58,7 +66,11 @@ namespace StudyHelper.WPF.Models
                 _secondsLeft--;
                 OnTimerUpdate?.Invoke();
             }
-            else Stop();
+            else
+            {
+                Stop();
+                OnCycleUpdate();
+            }
         }
 
         public void Start() 
@@ -86,6 +98,21 @@ namespace StudyHelper.WPF.Models
         {
             _timer.Stop();
             State = TimerState.Stopped;
+        }
+
+        private void OnCycleUpdate()
+        {
+            System.Diagnostics.Debug.WriteLine(_cycle);
+
+            if (_cycle < 4)
+                TimeInMinutes = _breakTime.Item1;
+            else
+            {
+                TimeInMinutes = _breakTime.Item2;
+                _cycle = 1;
+            }
+            _cycle++;
+            Start();
         }
     }
 }
