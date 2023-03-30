@@ -1,5 +1,8 @@
-﻿using StudyHelper.WPF.Commands;
+﻿using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
+using StudyHelper.WPF.Commands;
 using StudyHelper.WPF.Stores;
+using StudyHelper.WPF.Tools;
 using StudyHelper.WPF.ViewModels;
 using System;
 using System.Collections.Generic;
@@ -9,6 +12,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
+using System.Windows.Threading;
 
 namespace StudyHelper.WPF
 {
@@ -17,29 +21,55 @@ namespace StudyHelper.WPF
     /// </summary>
     public partial class App : Application
     {
-        private readonly PomodoroViewModel _pomodoroViewModel;
-        private readonly StudyHelperViewModel _studyHelperViewModel;
+        private readonly IHost _host;
 
-        private readonly ModalNavigationStore _modalNavigationStore;
-        private readonly PomodoroSessionStore _pomodoroSessionStore;
         public App()
         {
-            _modalNavigationStore = new ModalNavigationStore();
-            _pomodoroSessionStore = new PomodoroSessionStore();
-            PomodoroTimerViewModel pomodoroTimerViewModel = new PomodoroTimerViewModel(_modalNavigationStore, _pomodoroSessionStore);
-            _pomodoroViewModel = new PomodoroViewModel(pomodoroTimerViewModel);
-            _studyHelperViewModel = new StudyHelperViewModel(_pomodoroViewModel);
+            _host = CreateHost().Build();
         }
 
         protected override void OnStartup(StartupEventArgs e)
         {
-            MainWindow = new MainWindow()
-            {
-                DataContext = new MainViewModel(_studyHelperViewModel, _modalNavigationStore)
-            };
+            _host.Start();
+
+            MainWindow = _host.Services.GetRequiredService<MainWindow>();
 
             MainWindow.Show();
             base.OnStartup(e);
+        }
+
+        protected override void OnExit(ExitEventArgs e)
+        {
+            _host.StopAsync();
+            _host.Dispose();
+            
+            base.OnExit(e);
+        }
+
+        private IHostBuilder CreateHost()
+        {
+            var host = Host.CreateDefaultBuilder()
+                .ConfigureServices((context, services) =>
+                {
+                    services.AddTransient<OpenTimerSettingsCommand>();
+                    services.AddTransient<ApplyTimerSettingsCommand>();
+                    services.AddTransient<CloseModalCommand>();
+
+                    services.AddSingleton<MainViewModel>();
+                    services.AddSingleton<ApplicationViewModel>();
+                    services.AddSingleton<PomodoroViewModel>();
+                    services.AddSingleton<PomodoroTimerViewModel>();
+
+                    services.AddSingleton<ModalNavigationStore>();
+                    services.AddSingleton<PomodoroSessionStore>();
+
+                    services.AddSingleton<MainWindow>((services) => new MainWindow()
+                    {
+                        DataContext = services.GetRequiredService<MainViewModel>()
+                    });
+                });
+
+                return host;
         }
     }
 }

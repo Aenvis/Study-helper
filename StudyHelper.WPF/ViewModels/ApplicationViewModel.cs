@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 namespace StudyHelper.WPF.ViewModels
 {
-    public class StudyHelperViewModel : ViewModelBase
+    public class ApplicationViewModel : ViewModelBase
     {
         public PomodoroViewModel PomodoroViewModel { get; }
 
-        public StudyHelperViewModel(PomodoroViewModel pomodoroViewModel)
+        public ApplicationViewModel(PomodoroViewModel pomodoroViewModel)
         {
             PomodoroViewModel = pomodoroViewModel;
         }

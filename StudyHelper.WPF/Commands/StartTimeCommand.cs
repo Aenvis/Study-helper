@@ -1,4 +1,6 @@
-﻿using StudyHelper.WPF.ViewModels;
+﻿using StudyHelper.WPF.Models;
+using StudyHelper.WPF.Tools;
+using StudyHelper.WPF.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,18 +9,18 @@ using System.Threading.Tasks;
 
 namespace StudyHelper.WPF.Commands
 {
-    class StartTimeCommand : CommandBase
+    public class StartTimeCommand : CommandBase
     {
-        private readonly PomodoroTimerViewModel _pomodoroTimerViewModel;
+        private readonly Timer _timer;
 
-        public StartTimeCommand(PomodoroTimerViewModel pomodoroTimerViewModel)
+        public StartTimeCommand(Timer timer)
         {
-            _pomodoroTimerViewModel = pomodoroTimerViewModel;
+            _timer = timer;
         }
 
         public override void Execute(object? parameter)
         {
-           _pomodoroTimerViewModel.IsCounting = true;
+            _timer.Start();
         }
     }
 }

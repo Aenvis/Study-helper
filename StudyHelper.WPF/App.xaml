@@ -2,6 +2,11 @@
     x:Class="StudyHelper.WPF.App"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:local="clr-namespace:StudyHelper.WPF">
-    <Application.Resources />
+    xmlns:local="clr-namespace:StudyHelper.WPF"
+    xmlns:tools="clr-namespace:StudyHelper.WPF.Tools">
+    <Application.Resources>
+        <ResourceDictionary>
+            <tools:TimeDisplayConverter x:Key="TimeDisplayConverter" />
+        </ResourceDictionary>
+    </Application.Resources>
 </Application>

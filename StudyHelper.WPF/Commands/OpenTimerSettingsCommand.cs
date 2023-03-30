@@ -1,4 +1,5 @@
 ﻿using StudyHelper.WPF.Stores;
+using StudyHelper.WPF.Tools;
 using StudyHelper.WPF.ViewModels;
 using System;
 using System.Collections.Generic;
@@ -15,13 +16,13 @@ namespace StudyHelper.WPF.Commands
 
         public OpenTimerSettingsCommand(PomodoroTimerViewModel pomodoroTimerViewModel, ModalNavigationStore modalNavigationStore)
         {
-            _pomodoroTimerViewModel = pomodoroTimerViewModel;
+            _pomodoroTimerViewModel = pomodoroTimerViewModel; 
             _modalNavigationStore = modalNavigationStore;   
         }
 
         public override void Execute(object? parameter)
         {
-            TimerSettingsViewModel timerSettingsViewModel = new TimerSettingsViewModel(_pomodoroTimerViewModel, _modalNavigationStore);
+            TimerSettingsViewModel timerSettingsViewModel = new TimerSettingsViewModel(_modalNavigationStore, _pomodoroTimerViewModel);
             _modalNavigationStore.CurrentViewModel = timerSettingsViewModel;
         }
     }

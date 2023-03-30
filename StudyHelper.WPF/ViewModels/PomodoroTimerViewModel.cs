@@ -1,110 +1,51 @@
 ﻿using StudyHelper.WPF.Commands;
+using StudyHelper.WPF.Models;
 using StudyHelper.WPF.Stores;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Input;
-using System.Windows.Threading;
+using StudyHelper.WPF.Tools;
+using System.Windows.Input; 
 
 namespace StudyHelper.WPF.ViewModels
 {
     public class PomodoroTimerViewModel : ViewModelBase
     {
-        // displaying time in mm : ss format
-        private const int _maxSeconds = 59;
+        private  Timer _timer;
 
-        private readonly PomodoroSessionStore _pomodoroSessionStore;
-
-        private int _setTime;
-        public int SetTime
-        {
-            get => _setTime;
-            set
-            {
-                _setTime = value;
-            }
-        }
-
-        private int _currentTimeInMinutes;
-        public int CurrentTimeInMinutes
-        {
-            get => _currentTimeInMinutes;
-            private set
-            {
-                _currentTimeInMinutes = value;
-                OnPropertyChanged(nameof(CurrentTimeDisplay));
-            }
-        }
-
-        private int _currentTimeInSeconds;
-        public int CurrentTimeInSeconds
-        {
-            get => _currentTimeInSeconds;
-            set
-            {
-                _currentTimeInSeconds = value;
-                OnPropertyChanged(nameof(CurrentTimeDisplay));
-            }
-        }
-
-        public string CurrentTimeDisplay => (CurrentTimeInSeconds >= 10) ?
-            $"{CurrentTimeInMinutes} : {CurrentTimeInSeconds}" :
-            $"{CurrentTimeInMinutes} : 0{CurrentTimeInSeconds}";
-
-        public bool IsCounting { get; set; }
+        public string TimeDisplay => _timer.TimeDisplay;
 
         public ICommand? StartTimeCommand { get; }
         public ICommand? PauseTimeCommand { get; }
-        public ICommand? ResetTimeCommand { get; }
+        public ICommand? StopTimeCommand { get; }
         public ICommand? OpenTimerSettingsCommand { get; }
 
-        private readonly DispatcherTimer _timer;
-
-        public PomodoroTimerViewModel(ModalNavigationStore modalNavigationStore, PomodoroSessionStore pomodoroSessionStore)
+        public PomodoroTimerViewModel(ModalNavigationStore modalNavigationStore)
         {
-            StartTimeCommand = new StartTimeCommand(this);
-            PauseTimeCommand = new PauseTimeCommand(this);
+            _timer = new Timer();
+            StartTimeCommand = new StartTimeCommand(_timer); 
+            PauseTimeCommand = new PauseTimeCommand(_timer); 
+            StopTimeCommand = new StopTimeCommand(_timer);
             OpenTimerSettingsCommand = new OpenTimerSettingsCommand(this, modalNavigationStore);
 
-            _pomodoroSessionStore = pomodoroSessionStore;
-
-            SetTime = 1;
-            CurrentTimeInMinutes = SetTime;
-
-            _timer = new();
-            _timer.Interval = new TimeSpan(0, 0, 1);
-            _timer.Tick += Timer_Tick;
-            _timer.Start();
+            _timer.OnSetTimeChanged += Timer_OnSetTimeChanged;
+            _timer.OnTimerUpdate += _timer_OnTimerUpdate;
         }
 
-        private void Timer_Tick(object? sender, EventArgs e)
+        private void Timer_OnSetTimeChanged()
         {
-            if (!IsCounting)
-            {
-                return;
-            }
-
-            CurrentTimeInSeconds--;
-
-            if (CurrentTimeInSeconds <= 0)
-            {
-                CurrentTimeInMinutes--;
-            
-                if (CurrentTimeInMinutes < 0)
-                {
-                    OnCycleEnd();
-                }
-
-                CurrentTimeInSeconds = _maxSeconds;
-            }
+            if(_timer.State == TimerState.Stopped)
+                OnPropertyChanged(nameof(TimeDisplay));
         }
 
-        private void OnCycleEnd()
+        private void _timer_OnTimerUpdate()
         {
-            _pomodoroSessionStore.IncrementCycleCount();
-            CurrentTimeInMinutes = _pomodoroSessionStore.GetBreakTime() - 1;
+            if (_timer.State == TimerState.Running)
+                OnPropertyChanged(nameof(TimeDisplay));
+        }
+    
+        public void UpdatePomodoroTime(int timeInMinutes)
+        {
+            _timer.TimeInMinutes = timeInMinutes;
+            if (_timer.State == TimerState.Stopped)
+                OnPropertyChanged(nameof(TimeDisplay));
         }
     }
 }

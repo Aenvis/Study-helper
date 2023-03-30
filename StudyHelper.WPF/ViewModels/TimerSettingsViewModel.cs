@@ -1,5 +1,6 @@
 ﻿using StudyHelper.WPF.Commands;
 using StudyHelper.WPF.Stores;
+using StudyHelper.WPF.Tools;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,35 +13,32 @@ namespace StudyHelper.WPF.ViewModels
     public class TimerSettingsViewModel : ViewModelBase
     {
         private readonly PomodoroTimerViewModel _pomodoroTimerViewModel;
-
         public ICommand? EditTimerSettingsCommand { get; }
         public ICommand? CloseModalCommand { get; }
 
-        private string _setTimeDisplay;
-        public string SetTimeDisplay
+        private string? _setTimeString;
+
+        public string? SetTimeString
         {
-            get => _pomodoroTimerViewModel.SetTime.ToString();
+            get => _setTimeString;
             set
             {
-                _setTimeDisplay = value;
-
-                try
-                {
-                    _pomodoroTimerViewModel.SetTime = Int32.Parse(_setTimeDisplay);
-                    OnPropertyChanged(nameof(SetTimeDisplay));
-                }
-                catch (Exception)
-                {
-                    return;
-                }
+                _setTimeString = value;
+                OnPropertyChanged(SetTimeString);
             }
         }
 
-        public TimerSettingsViewModel(PomodoroTimerViewModel pomodoroTimerViewModel, ModalNavigationStore modalNavigationStore)
+        public TimerSettingsViewModel(ModalNavigationStore modalNavigationStore, PomodoroTimerViewModel pomodoroTimerViewModel)
         {
-            EditTimerSettingsCommand = new EditTimerSettingsCommand(modalNavigationStore);
-            CloseModalCommand = new CloseModalCommand(modalNavigationStore);
+            EditTimerSettingsCommand =  new ApplyTimerSettingsCommand(this, modalNavigationStore);
+            CloseModalCommand        =  new CloseModalCommand(modalNavigationStore);
             _pomodoroTimerViewModel = pomodoroTimerViewModel;
         }
+
+        public void Update()
+        {
+            if (Int32.TryParse(SetTimeString, out int timeInMinutes)) _pomodoroTimerViewModel.UpdatePomodoroTime(timeInMinutes);
+        }
+        
     }
 }
