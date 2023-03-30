@@ -2,13 +2,13 @@
 using StudyHelper.WPF.Models;
 using StudyHelper.WPF.Stores;
 using StudyHelper.WPF.Tools;
-using System.Windows.Input; 
+using System.Windows.Input;
 
 namespace StudyHelper.WPF.ViewModels
 {
     public class PomodoroTimerViewModel : ViewModelBase
     {
-        private  Timer _timer;
+        private Timer _timer;
 
         public string TimeDisplay => _timer.TimeDisplay;
 
@@ -20,8 +20,8 @@ namespace StudyHelper.WPF.ViewModels
         public PomodoroTimerViewModel(ModalNavigationStore modalNavigationStore)
         {
             _timer = new Timer();
-            StartTimeCommand = new StartTimeCommand(_timer); 
-            PauseTimeCommand = new PauseTimeCommand(_timer); 
+            StartTimeCommand = new StartTimeCommand(_timer);
+            PauseTimeCommand = new PauseTimeCommand(_timer);
             StopTimeCommand = new StopTimeCommand(_timer);
             OpenTimerSettingsCommand = new OpenTimerSettingsCommand(this, modalNavigationStore);
 
@@ -31,7 +31,7 @@ namespace StudyHelper.WPF.ViewModels
 
         private void Timer_OnSetTimeChanged()
         {
-            if(_timer.State == TimerState.Stopped)
+            if (_timer.State == TimerState.Stopped)
                 OnPropertyChanged(nameof(TimeDisplay));
         }
 
@@ -40,7 +40,7 @@ namespace StudyHelper.WPF.ViewModels
             if (_timer.State == TimerState.Running)
                 OnPropertyChanged(nameof(TimeDisplay));
         }
-    
+
         public void UpdatePomodoroTime(int timeInMinutes)
         {
             _timer.TimeInMinutes = timeInMinutes;
