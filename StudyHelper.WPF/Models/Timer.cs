@@ -52,7 +52,7 @@ namespace StudyHelper.WPF.Models
             _timer.Tick += OnTimerTick;
            
             //hardcoded set time and initial seconds calculation
-            TimeInMinutes = 1;
+            TimeInMinutes = 25;
             _secondsLeft = TimeInMinutes * 60;
 
             //initial clock state
