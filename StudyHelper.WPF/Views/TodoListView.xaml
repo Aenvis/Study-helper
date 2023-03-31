@@ -9,11 +9,32 @@
     d:DesignWidth="800"
     mc:Ignorable="d">
     <Grid>
+
         <Border
-            Padding="20"
-            BorderBrush="Black"
-            BorderThickness="1"
-            CornerRadius="5"
-            SnapsToDevicePixels="True" />
+                Padding="20"
+                BorderBrush="Black"
+                BorderThickness="1"
+                CornerRadius="5"
+                SnapsToDevicePixels="True">
+            <Border.Background>
+                <SolidColorBrush Opacity="0.4" Color="LightCyan" />
+            </Border.Background>
+        </Border>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <Grid Grid.Row="0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="100"/>
+                </Grid.ColumnDefinitions>
+
+                <TextBlock Grid.Column="0" Margin="30 15 30 0" FontSize="40" Text="Todo list"/>
+                <Button Grid.Column="1" Margin="30 15 30 0"  Content="btn_Test"/>
+            </Grid>
+        </Grid>
     </Grid>
 </UserControl>
