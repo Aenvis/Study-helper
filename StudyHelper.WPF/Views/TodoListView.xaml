@@ -29,11 +29,11 @@
             <Grid Grid.Row="0">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto"/>
-                    <ColumnDefinition Width="100"/>
+                    <ColumnDefinition Width="Auto"/>
                 </Grid.ColumnDefinitions>
 
                 <TextBlock Grid.Column="0" Margin="30 15 30 0" FontSize="40" Text="Todo list"/>
-                <Button Grid.Column="1" Margin="30 15 30 0"  Content="btn_Test"/>
+                <Button Grid.Column="1" Margin="0 15 30 0" Height="40" Width ="Auto" FontSize="25" Foreground="White" Background="Black" HorizontalAlignment="Left" Content="New task"/>
             </Grid>
         </Grid>
     </Grid>
