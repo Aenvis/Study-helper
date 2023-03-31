@@ -4,6 +4,7 @@ using StudyHelper.WPF.Commands;
 using StudyHelper.WPF.Stores;
 using StudyHelper.WPF.Tools;
 using StudyHelper.WPF.ViewModels;
+using StudyHelper.WPF.ViewModels.TodoList;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -59,6 +60,7 @@ namespace StudyHelper.WPF
                     services.AddSingleton<ApplicationViewModel>();
                     services.AddSingleton<PomodoroViewModel>();
                     services.AddSingleton<PomodoroTimerViewModel>();
+                    services.AddSingleton<TodoListViewModel>();
 
                     services.AddSingleton<ModalNavigationStore>();
                     services.AddSingleton<PomodoroSessionStore>();

@@ -30,7 +30,7 @@
         </Grid>
 
         <Grid Grid.Column="1">
-            <Views:TodoListView Margin="5,0,0,0" />
+            <Views:TodoListView Margin="5,0,0,0" DataContext="{Binding TodoListViewModel}" />
         </Grid>
 
     </Grid>

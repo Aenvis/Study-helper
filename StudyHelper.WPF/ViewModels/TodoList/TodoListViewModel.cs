@@ -8,5 +8,11 @@ namespace StudyHelper.WPF.ViewModels.TodoList
 {
     public class TodoListViewModel : ViewModelBase
     {
+        public TasksListingViewModel TasksListingViewModel { get; set; }
+
+        public TodoListViewModel()
+        {
+            TasksListingViewModel = new TasksListingViewModel();
+        }
     }
 }
