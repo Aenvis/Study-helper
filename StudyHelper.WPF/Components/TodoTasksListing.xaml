@@ -16,11 +16,15 @@
             Opacity="1"
             SnapsToDevicePixels="True">
             <Border.Background>
-                <SolidColorBrush Opacity="0.4" Color="Aqua" />
+                <SolidColorBrush Opacity="0.3" Color="#1246b0" />
             </Border.Background>
         </Border>
         <Grid>
-            <ListView Margin="10" ItemsSource="{Binding TasksListingItemViewModels}">
+            <ListView
+                Margin="10"
+                Padding="10"
+                Background="Transparent"
+                ItemsSource="{Binding TasksListingItemViewModels}">
                 <ListView.ItemContainerStyle>
                     <Style TargetType="ListViewItem">
                         <Setter Property="HorizontalContentAlignment" Value="Stretch" />
