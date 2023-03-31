@@ -6,15 +6,13 @@ namespace StudyHelper.WPF.Models
     {
         public Guid Id { get; set; }
         public string Title { get; set; }
-        public string Description { get; set; }
-        public DateOnly? Deadline { get; set; }
+        public DateTime? Deadline { get; set; }
 
 
-        public TodoTask(Guid id, string title, string description, DateOnly deadline)
+        public TodoTask(Guid id, string title, DateTime deadline)
         {
             Id = id;
             Title = title;
-            Description = description;
             Deadline = deadline;
         }
     }

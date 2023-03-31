@@ -21,8 +21,16 @@ namespace StudyHelper.WPF.ViewModels
 
         private void TEST()
         {
-            TodoTask task0 = new TodoTask(Guid.NewGuid(), "Read the article", "NILM", new DateOnly(2024, 12, 31));
+            TodoTask task0 = new TodoTask(Guid.NewGuid(), "Read the article", new DateTime(2024, 12, 31));
+            TodoTask task1 = new TodoTask(Guid.NewGuid(), "Read the article", new DateTime(2024, 12, 31));
+            TodoTask task2 = new TodoTask(Guid.NewGuid(), "Read the article", new DateTime(2024, 12, 31));
+            TodoTask task3 = new TodoTask(Guid.NewGuid(), "Read the article", new DateTime(2024, 12, 31));
+            TodoTask task4 = new TodoTask(Guid.NewGuid(), "Read the article", new DateTime(2024, 12, 31));
             _tasksListingItemViewModels.Add(new TasksListingItemViewModel(task0));
+            _tasksListingItemViewModels.Add(new TasksListingItemViewModel(task1));
+            _tasksListingItemViewModels.Add(new TasksListingItemViewModel(task2));
+            _tasksListingItemViewModels.Add(new TasksListingItemViewModel(task3));
+            _tasksListingItemViewModels.Add(new TasksListingItemViewModel(task4));
         }
     }
 }
