@@ -15,6 +15,9 @@
         <DataTemplate DataType="{x:Type vms:TimerSettingsViewModel}">
             <views:TimerSettingsView />
         </DataTemplate>
+        <DataTemplate DataType="{x:Type vms:AddNewTaskViewModel}">
+            <views:AddNewTaskView />
+        </DataTemplate>
     </Window.Resources>
     <Grid>
 
