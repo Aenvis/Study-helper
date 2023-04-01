@@ -9,7 +9,7 @@ namespace StudyHelper.WPF.Models
         public DateTime? Deadline { get; set; }
 
 
-        public TodoTask(Guid id, string title, DateTime deadline)
+        public TodoTask(Guid id, string title, DateTime? deadline = null)
         {
             Id = id;
             Title = title;

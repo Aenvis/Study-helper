@@ -13,21 +13,16 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace StudyHelper.WPF.Components
+namespace StudyHelper.WPF.Views
 {
     /// <summary>
-    /// Interaction logic for TodoTasksListingItem.xaml
+    /// Interaction logic for AddNewTaskView.xaml
     /// </summary>
-    public partial class TodoTasksListingItem : UserControl
+    public partial class AddNewTaskView : UserControl
     {
-        public TodoTasksListingItem()
+        public AddNewTaskView()
         {
             InitializeComponent();
-        }
-
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-            dropdown.IsOpen = false;
         }
     }
 }

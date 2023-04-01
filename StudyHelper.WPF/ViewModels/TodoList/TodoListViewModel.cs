@@ -1,8 +1,11 @@
-﻿using System;
+﻿using StudyHelper.WPF.Commands;
+using StudyHelper.WPF.Stores;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
 
 namespace StudyHelper.WPF.ViewModels.TodoList
 {
@@ -10,9 +13,12 @@ namespace StudyHelper.WPF.ViewModels.TodoList
     {
         public TasksListingViewModel TasksListingViewModel { get; set; }
 
-        public TodoListViewModel()
+        public ICommand? OpenNewTaskCommand { get; }
+
+        public TodoListViewModel(ModalNavigationStore modalNavigationStore)
         {
-            TasksListingViewModel = new TasksListingViewModel();
+            TasksListingViewModel = new TasksListingViewModel(modalNavigationStore);
+            OpenNewTaskCommand = new OpenNewTaskCommand(modalNavigationStore);
         }
     }
 }

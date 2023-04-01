@@ -36,15 +36,18 @@
                 <TextBlock
                     Grid.Column="0"
                     Margin="30,15,30,0"
+                    VerticalAlignment="Center"
                     FontSize="40"
                     Text="Todo list" />
                 <Button
                     Grid.Column="1"
                     Width="Auto"
-                    Margin="0,15,5,0"
+                    Margin="30,15,30,0"
                     Padding="5"
                     HorizontalAlignment="Right"
+                    VerticalAlignment="Center"
                     Background="#7F0A1759"
+                    Command="{Binding OpenNewTaskCommand}"
                     Content="New task"
                     FontSize="20"
                     Foreground="White" />

@@ -16,18 +16,13 @@ using System.Windows.Shapes;
 namespace StudyHelper.WPF.Components
 {
     /// <summary>
-    /// Interaction logic for TodoTasksListingItem.xaml
+    /// Interaction logic for TaskDetailsForm.xaml
     /// </summary>
-    public partial class TodoTasksListingItem : UserControl
+    public partial class TaskDetailsForm : UserControl
     {
-        public TodoTasksListingItem()
+        public TaskDetailsForm()
         {
             InitializeComponent();
-        }
-
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-            dropdown.IsOpen = false;
         }
     }
 }
