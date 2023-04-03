@@ -21,6 +21,9 @@
             FontWeight="DemiBold"
             Text="Add new task" />
 
-        <components:TaskDetailsForm Grid.Row="1" Margin="0,30,0,0" />
+        <components:TaskDetailsForm
+            Grid.Row="1"
+            Margin="0,30,0,0"
+            DataContext="{Binding TaskDetailsFormViewModel}" />
     </Grid>
 </UserControl>
