@@ -1,7 +1,6 @@
 ﻿using StudyHelper.WPF.Commands;
 using StudyHelper.WPF.Models;
 using StudyHelper.WPF.Stores;
-using StudyHelper.WPF.Tools;
 using System.Windows.Input;
 
 namespace StudyHelper.WPF.ViewModels

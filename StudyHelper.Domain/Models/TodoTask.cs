@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace StudyHelper.WPF.Models
+namespace StudyHelper.Domain.Models
 {
     public class TodoTask
     {

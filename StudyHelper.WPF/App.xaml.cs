@@ -2,18 +2,9 @@
 using Microsoft.Extensions.Hosting;
 using StudyHelper.WPF.Commands;
 using StudyHelper.WPF.Stores;
-using StudyHelper.WPF.Tools;
 using StudyHelper.WPF.ViewModels;
 using StudyHelper.WPF.ViewModels.TodoList;
-using System;
-using System.Collections.Generic;
-using System.Configuration;
-using System.Data;
-using System.Linq;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Input;
-using System.Windows.Threading;
 
 namespace StudyHelper.WPF
 {
@@ -63,7 +54,6 @@ namespace StudyHelper.WPF
                     services.AddSingleton<TodoListViewModel>();
 
                     services.AddSingleton<ModalNavigationStore>();
-                    services.AddSingleton<PomodoroSessionStore>();
 
                     services.AddSingleton<MainWindow>((services) => new MainWindow()
                     {

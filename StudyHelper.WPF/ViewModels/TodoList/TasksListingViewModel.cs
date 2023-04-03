@@ -1,4 +1,4 @@
-﻿using StudyHelper.WPF.Models;
+﻿using StudyHelper.Domain.Models;
 using StudyHelper.WPF.Stores;
 using System;
 using System.Collections.Generic;
