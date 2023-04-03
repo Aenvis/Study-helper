@@ -4,10 +4,9 @@ namespace StudyHelper.Domain.Models
 {
     public class TodoTask
     {
-        public Guid Id { get; set; }
-        public string Title { get; set; }
-        public DateTime? Deadline { get; set; }
-
+        public Guid Id { get; }
+        public string Title { get; }
+        public DateTime? Deadline { get; }
 
         public TodoTask(Guid id, string title, DateTime? deadline = null)
         {
