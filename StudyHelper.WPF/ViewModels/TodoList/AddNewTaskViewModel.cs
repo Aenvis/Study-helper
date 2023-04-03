@@ -1,5 +1,5 @@
 ﻿using StudyHelper.WPF.Commands;
-using StudyHelper.WPF.Commands.TodoList;
+using StudyHelper.WPF.Commands;
 using StudyHelper.WPF.Stores;
 using System;
 using System.Collections.Generic;
@@ -15,7 +15,7 @@ namespace StudyHelper.WPF.ViewModels
         public TaskDetailsFormViewModel TaskDetailsFormViewModel { get; }
         public AddNewTaskViewModel(ModalNavigationStore modalNavigationStore)
         {
-            ICommand submitCommand = new AddNewTaskCommand();
+            ICommand submitCommand = new AddNewTaskCommand(modalNavigationStore);
             ICommand cancelCommand = new CloseModalCommand(modalNavigationStore);
 
             TaskDetailsFormViewModel = new TaskDetailsFormViewModel(submitCommand, cancelCommand);
