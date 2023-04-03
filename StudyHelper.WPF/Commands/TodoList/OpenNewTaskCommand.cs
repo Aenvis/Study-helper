@@ -18,7 +18,7 @@ namespace StudyHelper.WPF.Commands
         }
         public override void Execute(object? parameter)
         {
-            var addNewTaskViewModel = new AddNewTaskViewModel();
+            var addNewTaskViewModel = new AddNewTaskViewModel(_modalNavigationStore);
             _modalNavigationStore.CurrentViewModel = addNewTaskViewModel;
         }
     }
