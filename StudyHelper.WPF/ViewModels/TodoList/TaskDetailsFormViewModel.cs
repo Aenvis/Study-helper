@@ -9,8 +9,8 @@ namespace StudyHelper.WPF.ViewModels
 {
     public class TaskDetailsFormViewModel : ViewModelBase
     {
-        private string _title;
-        public string Title
+        private string? _title;
+        public string? Title
         {
             get => _title;
             set
