@@ -36,8 +36,8 @@
                 Text="Deadline" />
             <DatePicker
                 VerticalAlignment="Center"
-                DataContext="{Binding Deadline}"
-                FontSize="20" />
+                FontSize="20"
+                SelectedDate="{Binding Deadline}" />
         </WrapPanel>
 
         <WrapPanel

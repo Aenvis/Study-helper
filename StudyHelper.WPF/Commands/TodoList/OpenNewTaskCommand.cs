@@ -11,14 +11,16 @@ namespace StudyHelper.WPF.Commands
     public class OpenNewTaskCommand : CommandBase
     {
         private readonly ModalNavigationStore _modalNavigationStore;
+        private readonly TodoTasksStore _todoTasksStore;
 
-        public OpenNewTaskCommand(ModalNavigationStore modalNavigationStore)
+        public OpenNewTaskCommand(ModalNavigationStore modalNavigationStore, TodoTasksStore todoTasksStore)
         {
             _modalNavigationStore = modalNavigationStore;
+            _todoTasksStore = todoTasksStore;
         }
         public override void Execute(object? parameter)
         {
-            var addNewTaskViewModel = new AddNewTaskViewModel(_modalNavigationStore);
+            var addNewTaskViewModel = new AddNewTaskViewModel(_modalNavigationStore, _todoTasksStore);
             _modalNavigationStore.CurrentViewModel = addNewTaskViewModel;
         }
     }

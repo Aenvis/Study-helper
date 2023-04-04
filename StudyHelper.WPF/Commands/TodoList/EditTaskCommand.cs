@@ -6,17 +6,16 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Windows.Input;
 
-namespace StudyHelper.WPF.Commands
+namespace StudyHelper.WPF.Commands.TodoList
 {
-    public class AddNewTaskCommand : AsyncCommandBase
+    internal class EditTaskCommand : AsyncCommandBase
     {
         private readonly AddNewTaskViewModel _addNewTaskViewModel;
         private readonly ModalNavigationStore _modalNavigationStore;
         private readonly TodoTasksStore _todoTasksStore;
 
-        public AddNewTaskCommand(AddNewTaskViewModel addNewTaskViewModel, ModalNavigationStore modalNavigationStore, TodoTasksStore todoTasksStore)
+        public EditTaskCommand(AddNewTaskViewModel addNewTaskViewModel, ModalNavigationStore modalNavigationStore, TodoTasksStore todoTasksStore)
         {
             _addNewTaskViewModel = addNewTaskViewModel;
             _modalNavigationStore = modalNavigationStore;
