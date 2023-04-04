@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore.Update.Internal;
 using StudyHelper.Domain.Models;
+using StudyHelper.WPF.Commands;
 using StudyHelper.WPF.Stores;
 using System.Windows.Input;
 
@@ -13,10 +14,10 @@ namespace StudyHelper.WPF.ViewModels
 
         public ICommand? OpenEditTaskCommand { get; }
 
-        public TasksListingItemViewModel(TodoTask task, ModalNavigationStore modalNavigationStore)
+        public TasksListingItemViewModel(TodoTask task, ModalNavigationStore modalNavigationStore, TodoTasksStore todoTasksStore)
         {
             TodoTask = task;
-           // OpenEditTaskCommand = new OpenEditTaskCommand(modalNavigationStore);
+            OpenEditTaskCommand = new OpenEditTaskCommand(this, modalNavigationStore, todoTasksStore);
         }
 
         public void Update(TodoTask task)

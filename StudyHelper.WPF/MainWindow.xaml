@@ -18,6 +18,9 @@
         <DataTemplate DataType="{x:Type vms:AddNewTaskViewModel}">
             <views:AddNewTaskView />
         </DataTemplate>
+        <DataTemplate DataType="{x:Type vms:EditTaskViewModel}">
+            <views:EditTaskView />
+        </DataTemplate>
     </Window.Resources>
     <Grid>
 

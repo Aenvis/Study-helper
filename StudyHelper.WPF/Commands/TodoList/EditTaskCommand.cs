@@ -7,27 +7,27 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace StudyHelper.WPF.Commands.TodoList
+namespace StudyHelper.WPF.Commands
 {
-    internal class EditTaskCommand : AsyncCommandBase
+    public class EditTaskCommand : AsyncCommandBase
     {
-        private readonly AddNewTaskViewModel _addNewTaskViewModel;
+        private readonly EditTaskViewModel _editTaskViewModel;
         private readonly ModalNavigationStore _modalNavigationStore;
         private readonly TodoTasksStore _todoTasksStore;
 
-        public EditTaskCommand(AddNewTaskViewModel addNewTaskViewModel, ModalNavigationStore modalNavigationStore, TodoTasksStore todoTasksStore)
+        public EditTaskCommand(EditTaskViewModel editTaskViewModel, ModalNavigationStore modalNavigationStore, TodoTasksStore todoTasksStore)
         {
-            _addNewTaskViewModel = addNewTaskViewModel;
+            _editTaskViewModel = editTaskViewModel;
             _modalNavigationStore = modalNavigationStore;
             _todoTasksStore = todoTasksStore;
         }
 
         public override void Execute(object? parameter)
         {
-            var formViewModel = _addNewTaskViewModel.TaskDetailsFormViewModel;
-            var newTask = new TodoTask(Guid.NewGuid(), formViewModel.Title, formViewModel.Deadline);
+            var formViewModel = _editTaskViewModel.TaskDetailsFormViewModel;
+            var newTask = new TodoTask(_editTaskViewModel.taskId, formViewModel.Title, formViewModel.Deadline);
 
-            _todoTasksStore.Create(newTask);
+            _todoTasksStore.Update(newTask);
             _modalNavigationStore.Close();
         }
 

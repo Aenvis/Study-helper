@@ -73,7 +73,7 @@ namespace StudyHelper.WPF.ViewModels
 
         private void AddTask(TodoTask task)
         {
-            var newTask = new TasksListingItemViewModel(task, _modalNavigationStore);
+            var newTask = new TasksListingItemViewModel(task, _modalNavigationStore, _todoTasksStore);
             _tasksListingItemViewModels.Add(newTask);
         }
     }

@@ -87,7 +87,7 @@
                             </Style.Triggers>
                         </Style>
                     </StackPanel.Resources>
-                    <Button Content="Edit" />
+                    <Button Command="{Binding OpenEditTaskCommand}" Content="Edit" />
                     <Button Content="Delete" />
                 </StackPanel>
             </Border>
