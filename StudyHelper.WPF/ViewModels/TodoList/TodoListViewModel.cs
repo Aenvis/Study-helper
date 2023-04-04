@@ -15,9 +15,9 @@ namespace StudyHelper.WPF.ViewModels.TodoList
 
         public ICommand? OpenNewTaskCommand { get; }
 
-        public TodoListViewModel(ModalNavigationStore modalNavigationStore)
+        public TodoListViewModel(ModalNavigationStore modalNavigationStore, TodoTasksStore todoTaskStore)
         {
-            TasksListingViewModel = new TasksListingViewModel(modalNavigationStore);
+            TasksListingViewModel = new TasksListingViewModel(modalNavigationStore, todoTaskStore);
             OpenNewTaskCommand = new OpenNewTaskCommand(modalNavigationStore);
         }
     }

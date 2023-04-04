@@ -32,6 +32,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\StudyHelper.Domain\StudyHelper.Domain.csproj" />
+    <ProjectReference Include="..\StudyHelper.EntityFramework\StudyHelper.EntityFramework.csproj" />
   </ItemGroup>
 
 </Project>

@@ -1,5 +1,11 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using StudyHelper.Domain.Commands;
+using StudyHelper.Domain.Queries;
+using StudyHelper.EntityFramework;
+using StudyHelper.EntityFramework.Commands;
+using StudyHelper.EntityFramework.Queries;
 using StudyHelper.WPF.Commands;
 using StudyHelper.WPF.Stores;
 using StudyHelper.WPF.ViewModels;
@@ -46,6 +52,13 @@ namespace StudyHelper.WPF
                     services.AddTransient<OpenTimerSettingsCommand>();
                     services.AddTransient<ApplyTimerSettingsCommand>();
                     services.AddTransient<CloseModalCommand>();
+                    services.AddTransient<IGetTodoTasksQuery, GetTodoTasksQuery>();
+                    services.AddTransient<ICreateTodoTaskCommand, CreateTodoTaskCommand>();
+                    services.AddTransient<IUpdateTodoTaskCommand, UpdateTodoTaskCommand>();
+                    services.AddTransient<IDeleteTodoTaskCommand, DeleteTodoTaskCommand>();
+
+                    services.AddSingleton<DbContextOptions>(new DbContextOptionsBuilder().UseSqlite("Data Source=todoTasks.db").Options);
+                    services.AddSingleton<TodoTasksDbContextFactory>();
 
                     services.AddSingleton<MainViewModel>();
                     services.AddSingleton<ApplicationViewModel>();
@@ -54,6 +67,7 @@ namespace StudyHelper.WPF
                     services.AddSingleton<TodoListViewModel>();
 
                     services.AddSingleton<ModalNavigationStore>();
+                    services.AddSingleton<TodoTasksStore>();
 
                     services.AddSingleton<MainWindow>((services) => new MainWindow()
                     {

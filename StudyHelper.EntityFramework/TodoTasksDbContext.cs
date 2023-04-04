@@ -10,7 +10,7 @@ namespace StudyHelper.EntityFramework
 {
     public class TodoTasksDbContext : DbContext
     {
-        DbSet<TodoTaskDto> TodoTasks { get; set; }
+        public DbSet<TodoTaskDto> TodoTasks { get; set; }
 
         public TodoTasksDbContext(DbContextOptions options) : base(options) { }
     }
