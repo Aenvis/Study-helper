@@ -88,7 +88,7 @@
                         </Style>
                     </StackPanel.Resources>
                     <Button Command="{Binding OpenEditTaskCommand}" Content="Edit" />
-                    <Button Content="Delete" />
+                    <Button Command="{Binding DeleteTaskCommand}" Content="Delete" />
                 </StackPanel>
             </Border>
         </custom:DropdownMenu>
