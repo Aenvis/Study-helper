@@ -1,11 +1,16 @@
+
 # StudyHelper
 
-### Tech: .NET (C#, WPF, EFC+SQLite), MVVM architecture
+### Stack: .NET (C#, WPF, EFC+SQLite), MVVM architecture, design patterns (DI, Factory Pattern, Repository Pattern)
 
 
-Simple study helper application. The desired result is to implement pomodoro timer with custom config (saveable), todo list to organize workflow and some mood analysis tool, so I can monitor my attitude while working. Also, the point of creating such an application is that I can choose any theme I want, and I want a Berserk themed application :)
+The desired result is to:
+-  implement pomodoro timer ✅
+- implement to-do list (task being stored in a SQLite database using EntityFramework Core) ✅
+- mood analysis tool (daily data (user input) being stored in database and simple graph showing user’s attitude over time) ❌
 
-To check on the current state of the application, go see <a href="https://github.com/Aenvis/Study-helper/tree/Dev">dev branch</a>
+A huge advantage is that I could use <a href="https://en.wikipedia.org/wiki/Berserk_(manga)">Berserk (wiki)</a> image as a background 
 
-
-![image](https://user-images.githubusercontent.com/76266906/229251747-034465e6-08d8-4c22-b902-3d4c831d357a.png)
+#### Here you can see what it looks like 
+![MainWindow 2023-04-05 15-55-00](https://user-images.githubusercontent.com/76266906/230103656-6ed48d45-2861-4aa6-8ef1-b979f37aa725.gif)
+![MainWindow 2023-04-05 15-57-27](https://user-images.githubusercontent.com/76266906/230103690-0a14e2f4-b21e-4c97-9565-576a59489472.gif)
