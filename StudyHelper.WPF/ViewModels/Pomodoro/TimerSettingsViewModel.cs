@@ -1,11 +1,5 @@
 ﻿using StudyHelper.WPF.Commands;
 using StudyHelper.WPF.Stores;
-using StudyHelper.WPF.Tools;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Input;
 
 namespace StudyHelper.WPF.ViewModels
@@ -30,15 +24,15 @@ namespace StudyHelper.WPF.ViewModels
 
         public TimerSettingsViewModel(ModalNavigationStore modalNavigationStore, PomodoroTimerViewModel pomodoroTimerViewModel)
         {
-            EditTimerSettingsCommand =  new ApplyTimerSettingsCommand(this, modalNavigationStore);
-            CloseModalCommand        =  new CloseModalCommand(modalNavigationStore);
+            EditTimerSettingsCommand = new ApplyTimerSettingsCommand(this, modalNavigationStore);
+            CloseModalCommand = new CloseModalCommand(modalNavigationStore);
             _pomodoroTimerViewModel = pomodoroTimerViewModel;
         }
 
         public void Update()
         {
-            if (Int32.TryParse(SetTimeString, out int timeInMinutes)) _pomodoroTimerViewModel.UpdatePomodoroTime(timeInMinutes);
+            if (int.TryParse(SetTimeString, out int timeInMinutes)) _pomodoroTimerViewModel.UpdatePomodoroTime(timeInMinutes);
         }
-        
+
     }
 }

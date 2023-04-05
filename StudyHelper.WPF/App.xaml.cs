@@ -1,18 +1,16 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using StudyHelper.Domain.Commands;
+using StudyHelper.Domain.Queries;
+using StudyHelper.EntityFramework;
+using StudyHelper.EntityFramework.Commands;
+using StudyHelper.EntityFramework.Queries;
 using StudyHelper.WPF.Commands;
 using StudyHelper.WPF.Stores;
-using StudyHelper.WPF.Tools;
 using StudyHelper.WPF.ViewModels;
-using System;
-using System.Collections.Generic;
-using System.Configuration;
-using System.Data;
-using System.Linq;
-using System.Threading.Tasks;
+using StudyHelper.WPF.ViewModels.TodoList;
 using System.Windows;
-using System.Windows.Input;
-using System.Windows.Threading;
 
 namespace StudyHelper.WPF
 {
@@ -32,7 +30,14 @@ namespace StudyHelper.WPF
         {
             _host.Start();
 
-            MainWindow = _host.Services.GetRequiredService<MainWindow>();
+            TodoTasksDbContextFactory todoTasksDbContextFactory = _host.Services.GetRequiredService<TodoTasksDbContextFactory>();
+
+            using (TodoTasksDbContext dbContext = todoTasksDbContextFactory.Create())
+            {
+                dbContext.Database.Migrate();
+            }
+
+                MainWindow = _host.Services.GetRequiredService<MainWindow>();
 
             MainWindow.Show();
             base.OnStartup(e);
@@ -54,14 +59,23 @@ namespace StudyHelper.WPF
                     services.AddTransient<OpenTimerSettingsCommand>();
                     services.AddTransient<ApplyTimerSettingsCommand>();
                     services.AddTransient<CloseModalCommand>();
+                    services.AddTransient<IGetTodoTasksQuery, GetTodoTasksQuery>();
+                    services.AddTransient<ICreateTodoTaskCommand, CreateTodoTaskCommand>();
+                    services.AddTransient<IUpdateTodoTaskCommand, UpdateTodoTaskCommand>();
+                    services.AddTransient<IDeleteTodoTaskCommand, DeleteTodoTaskCommand>();
+
+                    string connectionString = "Data Source=todoTasks.db";
+                    services.AddSingleton<DbContextOptions>(new DbContextOptionsBuilder().UseSqlite(connectionString).Options);
+                    services.AddSingleton<TodoTasksDbContextFactory>();
 
                     services.AddSingleton<MainViewModel>();
                     services.AddSingleton<ApplicationViewModel>();
                     services.AddSingleton<PomodoroViewModel>();
                     services.AddSingleton<PomodoroTimerViewModel>();
+                    services.AddSingleton<TodoListViewModel>();
 
                     services.AddSingleton<ModalNavigationStore>();
-                    services.AddSingleton<PomodoroSessionStore>();
+                    services.AddSingleton<TodoTasksStore>();
 
                     services.AddSingleton<MainWindow>((services) => new MainWindow()
                     {

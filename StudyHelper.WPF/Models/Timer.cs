@@ -3,6 +3,11 @@ using System.Windows.Threading;
 
 namespace StudyHelper.WPF.Models
 {
+    public enum BreakTime
+    {
+        Short = 5,
+        Long = 15
+    }
     public enum TimerState
     {
         Running,
@@ -18,7 +23,6 @@ namespace StudyHelper.WPF.Models
     public class Timer
     {
         private readonly DispatcherTimer _timer;
-        private readonly Tuple<int, int> _breakTime = new Tuple<int, int>(1, 2);
 
         private int _secondsLeft;
         private int _timeInMinutes;
@@ -52,7 +56,7 @@ namespace StudyHelper.WPF.Models
             _timer.Tick += OnTimerTick;
            
             //hardcoded set time and initial seconds calculation
-            TimeInMinutes = 1;
+            TimeInMinutes = 25;
             _secondsLeft = TimeInMinutes * 60;
 
             //initial clock state
@@ -99,10 +103,10 @@ namespace StudyHelper.WPF.Models
             System.Diagnostics.Debug.WriteLine(_cycle);
 
             if (_cycle < 4)
-                TimeInMinutes = _breakTime.Item1;
+                TimeInMinutes = (int)BreakTime.Short;
             else
             {
-                TimeInMinutes = _breakTime.Item2;
+                TimeInMinutes = (int)BreakTime.Long;
                 _cycle = 1;
             }
             _cycle++;
