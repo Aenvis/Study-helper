@@ -30,7 +30,14 @@ namespace StudyHelper.WPF
         {
             _host.Start();
 
-            MainWindow = _host.Services.GetRequiredService<MainWindow>();
+            TodoTasksDbContextFactory todoTasksDbContextFactory = _host.Services.GetRequiredService<TodoTasksDbContextFactory>();
+
+            using (TodoTasksDbContext dbContext = todoTasksDbContextFactory.Create())
+            {
+                dbContext.Database.Migrate();
+            }
+
+                MainWindow = _host.Services.GetRequiredService<MainWindow>();
 
             MainWindow.Show();
             base.OnStartup(e);
@@ -56,8 +63,8 @@ namespace StudyHelper.WPF
                     services.AddTransient<ICreateTodoTaskCommand, CreateTodoTaskCommand>();
                     services.AddTransient<IUpdateTodoTaskCommand, UpdateTodoTaskCommand>();
                     services.AddTransient<IDeleteTodoTaskCommand, DeleteTodoTaskCommand>();
-
-                    services.AddSingleton<DbContextOptions>(new DbContextOptionsBuilder().UseSqlite("Data Source=todoTasks.db").Options);
+                    string connectionString = "Data Source=todoTasks.db";
+                    services.AddSingleton<DbContextOptions>(new DbContextOptionsBuilder().UseSqlite(connectionString).Options);
                     services.AddSingleton<TodoTasksDbContextFactory>();
 
                     services.AddSingleton<MainViewModel>();
