@@ -37,27 +37,27 @@ namespace StudyHelper.WPF.Stores
             _todoTasks = new List<TodoTask>();
         }
 
-        public void Load()
+        public async Task Load()
         {
-            //var todoTasks = await _getTodoTasksQuery.Execute();
+            var todoTasks = await _getTodoTasksQuery.Execute();
             _todoTasks.Clear();
-           // _todoTasks.AddRange(todoTasks);
+            _todoTasks.AddRange(todoTasks);
 
             TodoTasksLoaded?.Invoke();
         }
 
-        public void Create(TodoTask task)
+        public async Task Create(TodoTask task)
         {
-           // await _createTodoTaskCommand.Exectute(task);
+            await _createTodoTaskCommand.Exectute(task);
 
             _todoTasks.Add(task);
 
             TodoTaskCreated?.Invoke(task);
         }
 
-        public void Update(TodoTask task)
+        public async Task Update(TodoTask task)
         {
-            //await _createTodoTaskCommand.Exectute(task);
+            await _updateTodoTaskCommand.Exectute(task);
 
             var taskId = _todoTasks.FindIndex(x => x.Id == task.Id);
 
@@ -70,9 +70,9 @@ namespace StudyHelper.WPF.Stores
             TodoTaskUpdated?.Invoke(task);
         }
 
-        public void Delete(Guid id)
+        public async Task Delete(Guid id)
         {
-            //await _createTodoTaskCommand.Exectute(task);
+            await _deleteTodoTaskCommand.Exectute(id);
 
             _todoTasks.RemoveAll(x => x.Id == id);
 

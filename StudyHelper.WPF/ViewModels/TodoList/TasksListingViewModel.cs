@@ -1,9 +1,11 @@
 ﻿using StudyHelper.Domain.Models;
+using StudyHelper.WPF.Commands;
 using StudyHelper.WPF.Stores;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Windows.Input;
 
 namespace StudyHelper.WPF.ViewModels
 {
@@ -16,16 +18,35 @@ namespace StudyHelper.WPF.ViewModels
 
         public IEnumerable<TasksListingItemViewModel>? TasksListingItemViewModels => _tasksListingItemViewModels;
 
+        public ICommand LoadTodoTasksCommand { get; }
+
         public TasksListingViewModel(ModalNavigationStore modalNavigationStore, TodoTasksStore todoTasksStore)
         {
             _tasksListingItemViewModels = new ObservableCollection<TasksListingItemViewModel>();
             _modalNavigationStore = modalNavigationStore;
             _todoTasksStore = todoTasksStore;
 
+            LoadTodoTasksCommand = new LoadTodoTasksCommand(todoTasksStore);
+
             _todoTasksStore.TodoTasksLoaded += TodoTasksStore_TodoTasksLoaded;
             _todoTasksStore.TodoTaskCreated += TodoTasksStore_TodoTaskCreated;
             _todoTasksStore.TodoTaskUpdated += TodoTasksStore_TodoTaskUpdated;
             _todoTasksStore.TodoTaskDeleted += TodoTasksStore_TodoTaskDeleted;
+        }
+
+        /// <summary>
+        /// Factory design pattern so that the TasksListingViewModel constructor is free of complex logic encapsulated in this static method
+        /// </summary>
+        /// <param name="modalNavigationStore"></param>
+        /// <param name="todoTasksStore"></param>
+        /// <returns></returns>
+        public static TasksListingViewModel LoadViewModel(ModalNavigationStore modalNavigationStore, TodoTasksStore todoTasksStore)
+        {
+            TasksListingViewModel viewModel = new TasksListingViewModel(modalNavigationStore, todoTasksStore);
+
+            viewModel.LoadTodoTasksCommand.Execute(null);
+
+            return viewModel;
         }
 
         public override void Dispose()

@@ -23,18 +23,20 @@ namespace StudyHelper.WPF.Commands
             _todoTasksStore = todoTasksStore;
         }
 
-        public override void Execute(object? parameter)
+        public override async Task ExecuteAsync(object? parameter)
         {
             var formViewModel = _addNewTaskViewModel.TaskDetailsFormViewModel;
             var newTask = new TodoTask(Guid.NewGuid(), formViewModel.Title, formViewModel.Deadline);
 
-            _todoTasksStore.Create(newTask);
-            _modalNavigationStore.Close();
-        }
-
-        public override Task ExecuteAsync(object? parameter)
-        {
-            throw new NotImplementedException();
+            try
+            {
+                await _todoTasksStore.Create(newTask);
+                _modalNavigationStore.Close();
+            }
+            catch (Exception)
+            {
+                throw new NotImplementedException();
+            }
         }
     }
 }

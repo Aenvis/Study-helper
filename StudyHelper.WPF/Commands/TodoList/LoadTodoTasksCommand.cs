@@ -5,24 +5,21 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace StudyHelper.WPF.Commands.TodoList
+namespace StudyHelper.WPF.Commands
 {
-    public class DeleteTaskCommand : AsyncCommandBase
+    public class LoadTodoTasksCommand : AsyncCommandBase
     {
-        private Guid _taskId;
-        private TodoTasksStore _todoTasksStore;
-
-        public DeleteTaskCommand(Guid id, TodoTasksStore todoTasksStore)
+        private readonly TodoTasksStore _todoTasksStore;
+        public LoadTodoTasksCommand(TodoTasksStore todoTasksStore)
         {
-            this._taskId = id;
-            this._todoTasksStore = todoTasksStore;
+            _todoTasksStore = todoTasksStore;
         }
 
         public override async Task ExecuteAsync(object? parameter)
         {
             try
             {
-                await _todoTasksStore.Delete(_taskId);
+                await _todoTasksStore.Load();
             }
             catch (Exception)
             {

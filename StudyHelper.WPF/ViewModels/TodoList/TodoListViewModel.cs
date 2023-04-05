@@ -17,7 +17,7 @@ namespace StudyHelper.WPF.ViewModels.TodoList
 
         public TodoListViewModel(ModalNavigationStore modalNavigationStore, TodoTasksStore todoTaskStore)
         {
-            TasksListingViewModel = new TasksListingViewModel(modalNavigationStore, todoTaskStore);
+            TasksListingViewModel = TasksListingViewModel.LoadViewModel(modalNavigationStore, todoTaskStore);
             OpenNewTaskCommand = new OpenNewTaskCommand(modalNavigationStore, todoTaskStore);
         }
     }

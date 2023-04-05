@@ -63,6 +63,7 @@ namespace StudyHelper.WPF
                     services.AddTransient<ICreateTodoTaskCommand, CreateTodoTaskCommand>();
                     services.AddTransient<IUpdateTodoTaskCommand, UpdateTodoTaskCommand>();
                     services.AddTransient<IDeleteTodoTaskCommand, DeleteTodoTaskCommand>();
+
                     string connectionString = "Data Source=todoTasks.db";
                     services.AddSingleton<DbContextOptions>(new DbContextOptionsBuilder().UseSqlite(connectionString).Options);
                     services.AddSingleton<TodoTasksDbContextFactory>();
