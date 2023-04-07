@@ -102,7 +102,7 @@ namespace StudyHelper.WPF.Models
         {
             System.Diagnostics.Debug.WriteLine(_cycle);
 
-            if (_cycle < 4)
+            if (_cycle < _maxCycle)
                 TimeInMinutes = (int)BreakTime.Short;
             else
             {

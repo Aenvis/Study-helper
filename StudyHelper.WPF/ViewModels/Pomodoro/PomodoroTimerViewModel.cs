@@ -7,7 +7,8 @@ namespace StudyHelper.WPF.ViewModels
 {
     public class PomodoroTimerViewModel : ViewModelBase
     {
-        private Timer _timer;
+        private readonly Timer _timer;
+        public Timer Timer => _timer;
 
         public string TimeDisplay => _timer.TimeDisplay;
 
