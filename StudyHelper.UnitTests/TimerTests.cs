@@ -97,6 +97,9 @@ namespace StudyHelper.WPF.Tests
             Assert.That(_timer.TimeInMinutes, Is.EqualTo(newTime));
         }
 
+        /// <summary>
+        ///  Checks whether Timer.TimeInMinutes is updated properly on setting new time in TimerSettingsViewModel
+        /// </summary>
         [Test]
         public void Timer_TimeInMinutes_OnTimerSettingsViewModelUpdate()
         {

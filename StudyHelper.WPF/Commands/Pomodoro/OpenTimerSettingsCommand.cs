@@ -17,6 +17,7 @@ namespace StudyHelper.WPF.Commands
         public override void Execute(object? parameter)
         {
             TimerSettingsViewModel timerSettingsViewModel = new TimerSettingsViewModel(_modalNavigationStore, _pomodoroTimerViewModel);
+            timerSettingsViewModel.SetTimeString = $"{_pomodoroTimerViewModel.Timer.TimeInMinutes}";
             _modalNavigationStore.CurrentViewModel = timerSettingsViewModel;
         }
     }
