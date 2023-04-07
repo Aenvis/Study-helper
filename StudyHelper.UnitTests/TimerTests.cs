@@ -61,6 +61,17 @@ namespace StudyHelper.WPF.Tests
             Assert.That(expectedEventFired, Is.True);
         }
 
+        [Test]
+        public void Timer_TimeInMinutes_SetTimeBeforeStart()
+        {
+            var newTime = 5;
+            _timer.TimeInMinutes = newTime;
+
+            _timer.Start();
+
+            Assert.That(_timer.TimeInMinutes, Is.EqualTo(newTime));
+        }
+
 
         /// <summary>
         /// No matter the state of the clock, whenever we change the time in TimerSettingsView it should always be set to the new value.
@@ -98,7 +109,7 @@ namespace StudyHelper.WPF.Tests
         }
 
         /// <summary>
-        ///  Checks whether Timer.TimeInMinutes is updated properly on setting new time in TimerSettingsViewModel
+        ///  Checks whether Timer.TimeInMinutes is updated properly on setting new time in TimerSettingsViewModel and starting the clock
         /// </summary>
         [Test]
         public void Timer_TimeInMinutes_OnTimerSettingsViewModelUpdate()
@@ -112,6 +123,7 @@ namespace StudyHelper.WPF.Tests
 
             _timerSettingsViewModel.SetTimeString = $"{newTime}";
             _timerSettingsViewModel.Update();
+            _pomodoroTimerViewModel.Timer.Start();
 
             Assert.That(_pomodoroTimerViewModel.Timer.TimeInMinutes, Is.EqualTo(newTime));
         }
