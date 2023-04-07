@@ -4,11 +4,11 @@
 ### Stack: .NET (C#, WPF, EFC+SQLite), NUNit, MVVM architecture, design patterns (DI, Factory Pattern, Repository Pattern)
 
 
-The desired result is to:
-- implement pomodoro timer ✅
-- implement to-do list (tasks being stored in SQLite database using EntityFramework Core) ✅
+The desired result is to implement:
+- pomodoro timer ✅
+- to-do list (tasks being stored in SQLite database using EntityFramework Core) ✅
 - mood analysis tool (daily data (user input) being stored in database and simple graph showing user’s attitude over time) ❌
-- implement unit tests using NUnit framework ✅
+- unit tests using NUnit framework ✅
 
 A huge advantage is that I could use <a href="https://en.wikipedia.org/wiki/Berserk_(manga)">Berserk (wiki)</a> image as a background 
 
