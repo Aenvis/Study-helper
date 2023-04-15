@@ -9,12 +9,13 @@ using StudyHelper.EntityFramework.Queries;
 using StudyHelper.WPF.Commands;
 using StudyHelper.WPF.Stores;
 using StudyHelper.WPF.ViewModels;
+using StudyHelper.WPF.ViewModels.MoodAnalyser;
 using StudyHelper.WPF.ViewModels.TodoList;
 using System.Windows;
 
 namespace StudyHelper.WPF
 {
-    /// <summary>
+    /// <summary> 
     /// Interaction logic for App.xaml
     /// </summary>
     public partial class App : Application
@@ -71,8 +72,8 @@ namespace StudyHelper.WPF
                     services.AddSingleton<MainViewModel>();
                     services.AddSingleton<ApplicationViewModel>();
                     services.AddSingleton<PomodoroViewModel>();
-                    services.AddSingleton<PomodoroTimerViewModel>();
                     services.AddSingleton<TodoListViewModel>();
+                    services.AddSingleton<MoodAnalysisViewModel>();
 
                     services.AddSingleton<ModalNavigationStore>();
                     services.AddSingleton<TodoTasksStore>();

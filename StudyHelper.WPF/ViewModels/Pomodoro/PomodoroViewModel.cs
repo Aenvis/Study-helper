@@ -1,4 +1,5 @@
-﻿using System;
+﻿using StudyHelper.WPF.Stores;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,9 +12,9 @@ namespace StudyHelper.WPF.ViewModels
     {
         public PomodoroTimerViewModel PomodoroTimerViewModel { get; }
 
-        public PomodoroViewModel(PomodoroTimerViewModel pomodoroTimerViewModel)
+        public PomodoroViewModel(ModalNavigationStore modalNavigationStore)
         {
-            PomodoroTimerViewModel = pomodoroTimerViewModel;
+            PomodoroTimerViewModel = new PomodoroTimerViewModel(modalNavigationStore);
         }
     }
 }
